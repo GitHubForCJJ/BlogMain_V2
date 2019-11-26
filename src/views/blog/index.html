@@ -1,0 +1,99 @@
+<div class="layui-card advert_box">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-Advert-search">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">广告位</label>
+                <div class="layui-input-block">
+                    <select id='SLocation' name="LocationId">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">广告名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="adname|l" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <input type="hidden" name=States>
+            <div class="layui-inline">
+                <label class="layui-form-label" for="CreateTime|be">添加时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="createtime|be" id="CreateTime|be" class="layui-input search_date" readonly
+                        placeholder="请选择">
+                </div>
+                <div class="layui-form-mid">
+                    -
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" name="createtime|se" id="CreateTime|se" class="layui-input search_date" readonly
+                        placeholder="请选择">
+                </div>
+            </div>
+
+            <div class="layui-block layui_btn_area">
+                <button class="layui-btn" lay-submit="" id='LAY-Advert-search'
+                    lay-filter="LAY-Advert-search">查询</button>
+                <script type='text/html' template>
+                    {{# if(GHM_Core.btnRole('advert/index:add')){ }}
+                    <button class="layui-btn layui-btn-another layuiadmin-btn-Advert br5 bg-orange"
+                        data-type="add">新增广告</button>
+                    {{# } }}
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="layui-card-body">
+        <ul class="g-states-tab states_tab">
+            <!-- 0正常数据 1已禁用 -->
+            <li class="active" data-state="">全部</li>
+            <li data-state="0">启用中</li>
+            <li data-state="1">禁用中</li>
+        </ul>
+        <table id="LAY-Blog-manage" lay-filter="LAY-Blog-manage"></table>
+    </div>
+
+    <script type="text/html" id="temp_Advert_ImgUrlPath">
+        <div class="img">
+            <img src={{ d.ImgUrlPath }} alt="广告图片路径" class="show_img" />
+        </div>
+    </script>
+    <script type="text/html" id="temp_Advert_CreateTime">
+
+    </script>
+    <script type="text/html" id="temp_Advert_States">
+        {{#  if(d.States ==  0 && GHM_Core.btnRole('advert/index:startorstop')){ }}
+        <input type="checkbox" lay-filter="startstop2" value={{d.KID}} lay-skin="switch" lay-text="启用|禁用" checked>
+        {{#  }else if(d.States ==  0 && GHM_Core.btnRole('advert/index:startorstop')==false){ }}
+        <input type="checkbox" lay-filter="startstop2" value={{d.KID}} lay-skin="switch" lay-text="启用|禁用" disabled>
+        {{#  } else if(d.States ==  1 && GHM_Core.btnRole('advert/index:startorstop')) { }}
+        <input type="checkbox" lay-filter="startstop2" value={{d.KID}} lay-skin="switch" lay-text="启用|禁用">
+        {{#  } else if(d.States ==  1 && GHM_Core.btnRole('advert/index:startorstop')==false) { }}
+        <input type="checkbox" lay-filter="startstop2" value={{d.KID}} lay-skin="switch" lay-text="启用|禁用" disabled>
+        {{#  } }}
+    </script>
+    <script type="text/html" id="table-Advert-operation">
+        {{# if(GHM_Core.btnRole('advert/index:edit')){ }}
+        <a class="table_operate" lay-event="edit">【编辑】</a>
+        {{# } }}
+
+        {{# if(GHM_Core.btnRole('advert/index:del')){ }}
+        <a class="table_operate" lay-event="del">【删除】</a>
+        {{# } }}
+        {{# if(GHM_Core.btnRole('advert/index:log')){ }}
+        <a class="table_operate" lay-event="log">【日志】</a>
+        {{# } }}
+    </script>
+
+</div>
+<script>
+    layui.use('advert', layui.factory('advert')).use(['admin', 'table'], function () {
+        var $ = layui.$,
+            admin = layui.admin,
+            view = layui.view,
+            table = layui.table,
+            form = layui.form;
+        form.render(null, 'LAY-Advert-search');
+    });
+</script>
