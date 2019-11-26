@@ -1,0 +1,214 @@
+<script type="text/html" template>
+    <!-- <link rel="stylesheet" href="{{ layui.setter.base }}style/crePro/edit.css?v={{ layui.admin.v }}-1" media="all"> -->
+<link rel="stylesheet" href="{{ layui.setter.base }}style/advert/addoredit.css?v={{ layui.admin.v }}-1" media="all">
+</script>
+<div class="admin_popup_box">
+    <div class="layui-form advert_form" lay-filter="LAY-edit-Advert-submit">
+        <div class="scroll_content addAdvert">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">广告位</label>
+                    <div class="layui-input-block">
+                        <select id='SLocation' name="LocationId">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">广告名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="adname|l" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                </script>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required_labe">广告序号</label>
+            <div class="layui-input-block">
+                <script type="text/html" template>
+              <input type="text" id='SortNums' name="SortNum" value="{{ d.params.SortNum || '' }}"
+                onkeyup="this.value=this.value.replace(/[^\d]/g,'')" placeholder="序号越大，广告越靠前" autocomplete="off"
+                class="layui-input">
+            </script>
+                <div id=''>当前已使用最大序号：<label id='maxsort' style="color:red">X</label></div>
+            </div>
+        </div>
+        </script>
+        <div class="layui-form-item">
+            <label for="ImgPath" class="layui-form-label  required_labe">广告图片</label>
+            <div class="layui-input-block upload-box" id="upload-box1">
+                <script type="text/html" template>
+              <input type="file" class="layui-hide" id="upadpic"
+                data-cropType="{{ d.params.LocationId ? d.params.LocationId : '1'}}"
+                data-locationId="{{ d.params.LocationId || '' }}">
+              <ul class="img-box" id='img-box1'>
+                <li class='item' {{ d.params.ImgUrlPath === undefined ? "style='display:none'" : '' }}
+                  {{ d.params.ImgUrlPath == null ? "style='display:none'" : '' }}
+                  {{ d.params.ImgUrlPath == '' ? "style='display:none'" : '' }}>
+                  <img src={{ d.params.ImgUrlPath || '' }}>
+                  <i class="close" id="close1"></i>
+                </li>
+              </ul>
+              <a href="javascript:" class="upload-btn" id='upload-btn1'
+                {{ d.params.ImgUrlPath == undefined ? '' : "style='display:none'" }}>+ 添加图片</a>
+            </script>
+                <div class="up_right" id="cropMsg">建议尺寸750*428像素</div>
+            </div>
+        </div>
+        <script type="text/html" template>
+          <div class="layui-form-item tzpic_div" {{ d.params.AdType == '1' ? '' : 'hidden' }}
+            {{ d.params.AdType == undefined ? 'hidden' : '' }} {{ d.params.AdType == '' ? 'hidden' : '' }}>
+            <label for="ImgPath" class="layui-form-label  required_labe">跳转图片</label>
+            <div class="layui-input-block upload-box" id="upload-box2">
+              <input type="file" class="layui-hide" id="uptzpic">
+              <ul class="img-box" id='img-box2'>
+                <li class='item' {{ (d.params.AdType == '1' && d.params.ClickUrl !='') ?  "" : "style='display:none'" }}>
+                  <img src={{ (d.params.AdType == '1' && d.params.ClickUrl !='') ? d.params.ClickUrl || '' :'' }}>
+                  <i class="close" id="close2"></i>
+                </li>
+              </ul>
+  
+              <a href="javascript:" class="upload-btn" id='upload-btn2'
+                {{ (d.params.AdType == '1' && d.params.ClickUrl !='') ?  "style='display:none'" : "" }}>+ 添加图片</a>
+              <div class="up_right">
+                建议：宽度不超过600像素的静态图片
+                大小不超过5MB
+              </div>
+            </div>
+          </div>
+            </script>
+
+    </div>
+    <div class="btn_area" style="background-color:#FFFFCC;border:none">
+        <script type="text/html" template>
+          <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-add-Advert-submit"
+            {{ (d.params.KID == undefined) ?  "": "style='display:none'"  }}>确定</a>
+          <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-edit-Advert-submit"
+            {{ (d.params.KID == undefined) ?  "style='display:none'" : "" }}>确定</a>
+        </script>
+        <!-- 关闭最新弹出的层 -->
+        <a href="javascript:" class="layui-btn layui-btn-cancel" onclick="layer.closeAll()">取消</a>
+    </div>
+</div>
+</div>
+
+
+
+<script>
+    layui.use(['jquery', 'form', 'GHM', 'GHM_upload', 'laydate'], function () {
+        var $ = layui.$,
+            GHM = layui.GHM,
+            GHM_upload = layui.GHM_upload,
+            form = layui.form,
+            laydate = layui.laydate,
+            formSelects = layui.formSelects;
+
+        lay('.show_date').each(function () {
+            laydate.render({
+                elem: this,
+                format: 'yyyy-MM-dd'
+            })
+        });
+
+        GHM.post(GHM_config.url.GetAllAdAndMaxSort, {
+            Data: '{}'
+        }).then(function (res) {
+            console.log(res)
+            var a = $('#LocationId').val();
+            var atype = $('#AdType').val();
+            //新增时时设置值广告位id,和广告位名称初值
+            $("#AdLocationId").val(res.Data.Adlocations[0].KID);
+            $("#AdLocationName").val(res.Data.Adlocations[0].LocationName);
+            $.each(res.Data.Adlocations, function (index, val) {
+                if (a == val.KID) {
+                    //编辑时覆盖设置值广告位id,和广告位名称
+                    $("#AdLocationId").val(val.KID);
+                    $("#AdLocationName").val(val.LocationName);
+                    var option1 = " <option  value='" + val.KID + "' selected  >" + val
+                        .LocationName + "</option>"
+                    $("#LocationId2").append(option1);
+                } else {
+                    var option = " <option  value='" + val.KID + "'>" + val.LocationName +
+                        "</option>"
+                    $("#LocationId2").append(option);
+                }
+            });
+            //设置最大序号
+            $('#maxsort').text(res.Data.MaxNum);
+
+            form.render('select');
+
+            //读取暂存的值
+            var complayinfo = $("#companyidtran").val();
+            console.log(complayinfo)
+
+            if (complayinfo != "" && complayinfo.length > 0) {
+                var complayids = complayinfo.split(',');
+                console.log(complayids)
+                if (complayids.length > 0) {
+
+                    for (var i = 0; i < complayids.length; i++) {
+                        if (complayids[i] == "" || complayids[i] == null) {
+                            complayids.splice(i, 1)
+                        }
+                    }
+                }
+
+            }
+        }).catch(function (error) {
+            console.log(error);
+            var msg = '';
+            if (error.Msg) msg = error.Msg;
+            else msg = '执行失败，服务器未返回失败信息';
+            layer.msg(msg);
+        });
+
+
+        // 监听广告位类型选择
+        form.on('select(Filter_LocationId2)', function (data) {
+            var oldType = $('#upadpic').attr('data-locationId'); //编辑前广告类型
+            var $cropMsg = $('#cropMsg');
+            $("#AdLocationName").val(this.innerText);
+            $("#LocationId").val(data.value);
+            var adType = data.value;
+            // adType 1:首页;!1:其他
+            $('#upadpic').attr('data-cropType', adType);
+            if (adType == 1) {
+                $cropMsg.text('建议尺寸750*428像素');
+            } else {
+                $cropMsg.text('建议尺寸346*180像素');
+            }
+            // 监听类型，是否需要重新传图
+            if (oldType && ((oldType == 1 && adType != 1) || (oldType != 1 && adType == 1))) {
+                $('#img-box1').html('');
+                $('#upload-btn1').show();
+            }
+        });
+
+        //监听广告类型切换
+        form.on('radio(AdType)', function (data) {
+            if (data.value == 1) {
+                $("#AdTypevalue").val('1');
+                $(".ClickUrl_div").hide();
+                $(".tzpic_div").show();
+                $(".tzpro_div").hide();
+            } else if (data.value == 0) {
+                $("#AdTypevalue").val('0');
+                $(".ClickUrl_div").show();
+                $(".tzpic_div").hide();
+                $(".tzpro_div").hide();
+            } else if (data.value == 2) {
+                $("#AdTypevalue").val('2');
+                $(".ClickUrl_div").hide();
+                $(".tzpic_div").hide();
+                $(".tzpro_div").show();
+
+                //处理产品
+                queproapi();
+            }
+        });
+
+        form.render();
+    });
+</script>
