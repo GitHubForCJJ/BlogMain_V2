@@ -1,8 +1,8 @@
 {
-  "code": 0
+  "Code": 0
   ,"msg": ""
   ,"data": {
-    "username": "Rodman"
+    "username": "东走西走"
     ,"sex": "男"
     ,"role": 1
   }

@@ -1,0 +1,20 @@
+.blog_contain {
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+    padding-top: 15px;
+    border: 1px solid rgb(126, 114, 114);
+    border-radius: 2px;
+}
+
+.blog_contain .left {
+    width: 40%;
+    height: 100%;
+
+}
+
+.blog_contain .right {
+    margin-left: 30px;
+    width: calc(60% - 30px);
+    height: 100%;
+}

@@ -221,7 +221,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
     //事件
     var active = {
         add: function () {
-            GHM_Core.fullPopup('添加广告信息', 'advert/addOrEdit', null, function () {
+            GHM_Core.fullPopup('添加博客信息', 'blog/addOrEdit', null, function () {
                 lay('.show_date').each(function () {
                     laydate.render({
                         elem: this,
@@ -229,8 +229,6 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
                         format: 'yyyy-MM-dd HH:mm:ss'
                     })
                 });
-                // 设置margin
-                setMargin();
 
                 //上传广告图片
                 var $imgBox = $('#upload-box1 .img-box');
@@ -255,14 +253,6 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
                         $imgBox.append(htm);
                     })
                 });
-
-
-                //显示隐藏产品
-                showprodiv();
-                //查询商品
-                querypro();
-                //选择产品
-                choosepro();
 
                 $(document).on('click', '#close1', function () {
                     $("#upload-btn1").show();

@@ -1,5 +1,5 @@
 {
-    "code": 0,
+    "Code": 0,
     "pages": 1,
     "data": [
         {
@@ -70,7 +70,7 @@
         },
         {
             "id": 61,
-            "content": "Rodman 已经同意你的好友申请",
+            "content": "东走西走 已经同意你的好友申请",
             "uid": 168,
             "from": null,
             "from_group": null,
