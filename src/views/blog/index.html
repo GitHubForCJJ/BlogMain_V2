@@ -16,14 +16,39 @@
                 </div>
             </div>
 
-            <div class="layui-block layui_btn_area">
-                <button class="layui-btn" lay-submit="" id='LAY-Advert-search'
-                    lay-filter="LAY-Advert-search">查询</button>
 
-                <button class="layui-btn layui-btn-another layuiadmin-btn-Advert br5 bg-orange"
-                    data-type="add">新增</button>
-                </script>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">文章类型</label>
+                <div class="layui-input-block">
+                    <select id='' class="layui-select" name="Type">
+                        <option value=""></option>
+                        <option value="">类型1</option>
+                        <option value="">类型2</option>
+                    </select>
+                </div>
             </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">广告位</label>
+                <div class="layui-input-block">
+                    <select id='SLocation' name="LocationId">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">标题</label>
+                <div class="layui-input-block" style="width: 200px;">
+                    <input type="text" name="adname|l" placeholder="请输入" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-block layui_btn_area">
+            <button class="layui-btn" lay-submit="" id='LAY-Advert-search' lay-filter="LAY-Advert-search">查询</button>
+
+            <button class="layui-btn layui-btn-another layuiadmin-btn-Advert br5 bg-orange" data-type="add">新增</button>
+            </script>
         </div>
     </div>
     <div class="layui-card-body">
@@ -74,6 +99,13 @@
             view = layui.view,
             table = layui.table,
             form = layui.form;
+
+        lay('.search_date').each(function () {
+            laydate.render({
+                elem: this,
+                format: 'yyyy-MM-dd'
+            })
+        });
         form.render(null, 'LAY-Blog-search');
     });
 </script>

@@ -1,70 +1,105 @@
+<!-- 添加、编辑员工 -->
+<title>添加编辑文章</title>
 <script type="text/html" template>
-<link rel="stylesheet" href="{{ layui.setter.base }}style/blog/addOrEdit.css?v={{ layui.admin.v }}-1" media="all">
+    <link rel="stylesheet" href="{{ layui.setter.base }}style/blog/addOrEdit.css" media="all">
 </script>
 <div class="admin_popup_box">
-    <div class="layui-form" lay-filter="LAY-edit-Blog-submit">
-        <div class="blog_contain">
-            <div class="left">
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">文章类型</label>
-                        <div class="layui-input-block">
-                            <select id='' class="layui-select" name="Type">
-                                <option value=""></option>
-                                <option value="">类型1</option>
-                                <option value="">类型2</option>
-                            </select>
+    <div class="scroll_contain">
+        <div class="layui-form">
+            <div class="blog_contain">
+                <div class="left">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">文章类型</label>
+                            <div class="layui-input-block">
+                                <select id='' class="layui-select" name="Type">
+                                    <option value=""></option>
+                                    <option value="">类型1</option>
+                                    <option value="">类型2</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">广告位</label>
-                        <div class="layui-input-block">
-                            <select id='SLocation' name="LocationId">
-                                <option value=""></option>
-                            </select>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">原创地址</label>
+                            <div class="layui-input-block">
+                                <input type="text" style="width: 350px;" name="adname|l" placeholder="请输入"
+                                    autocomplete="off" class="layui-input">
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">标题</label>
-                        <div class="layui-input-block" style="width: 200px;">
-                            <input type="text" name="adname|l" placeholder="请输入" autocomplete="off" class="layui-input">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">是否原创</label>
+                            <div class="layui-input-block">
+                                <select id='' class="layui-select" name="Type">
+                                    <option value="0">是</option>
+                                    <option value="1">否</option>
+                                </select>
+                            </div>
                         </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">原创地址</label>
+                            <div class="layui-input-block">
+                                <input type="text" style="width: 350px;" name="adname|l" placeholder="请输入"
+                                    autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="right">
 
                 </div>
             </div>
-            <div class="right">
-                abc
-            </div>
-
         </div>
+        <!-- 富文本 -->
+        <div class="ue_contain">
+            <script id="ueditor" name="ueditor" type="text/plain">
 
-
-        <!-- <div class="btn_area" style="background-color:rgb(201, 201, 178);border:none">
-            <script type="text/html" template>
-          <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-add-Advert-submit"
-            {{ (d.params.KID == undefined) ?  "": "style='display:none'"  }}>确定</a>
-          <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-edit-Advert-submit"
-            {{ (d.params.KID == undefined) ?  "style='display:none'" : "" }}>确定</a>
-        </script>   
-        <a href="javascript:" class="layui-btn layui-btn-cancel" onclick="layer.closeAll()">取消</a> -->
+                    </script>
+        </div>
+        <div class="btn_area" style="border:none">
+            <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-Blog-add">确定</a>
+            <a href="javascript:" class="layui-btn layui-btn-cancel" onclick="layer.closeAll()">取消</a>
+        </div>
     </div>
-</div>
-</div>
 
-
+</div>
 
 <script>
-    layui.use(['jquery', 'form', 'GHM', 'GHM_upload', 'laydate'], function () {
-        var $ = layui.$,
-            GHM = layui.GHM,
-            GHM_upload = layui.GHM_upload,
-            form = layui.form,
-            laydate = layui.laydate;
+    // layui.use(['employeeEdit'], layui.factory('employeeEdit'));
+    layui.use(['form', 'laydate'], function () {
+        var form = layui.form
+        laydate = layui.laydate;
 
-        form.render(null, 'LAY-edit-Blog-submit');
+        lay('.search_date').each(function () {
+            laydate.render({
+                elem: this,
+                format: 'yyyy-MM-dd'
+            })
+        });
+        form.render();
 
+        var width = $(".ue_contain").width();
+
+        var ue = UE.getEditor('ueditor', {
+            initialFrameWidth: width - 60,
+            initialFrameHeight: 600
+        });
+        ue.ready(function () {
+
+        })
+
+        var gethtml = function () {
+            var html = ue.getContent();
+            console.log(html)
+            return html;
+        }
+
+        form.on('submit(LAY-Blog-add)', function (data) {
+            var field = data.field;
+            var content = gethtml();
+
+            $(".layui-table-box .layui-table-fixed").remove();
+        });
     });
 </script>

@@ -19,6 +19,9 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
         GHM_Crop = layui.GHM_Crop,
         form = layui.form;
 
+    layer.msg("a");
+    console.info("a")
+
 
     GHM.post(GHM_config.url.GetAllAdAndMaxSort, {
         Data: '{}'

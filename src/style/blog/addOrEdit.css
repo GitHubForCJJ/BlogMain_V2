@@ -1,20 +1,45 @@
 .blog_contain {
     display: flex;
     flex-direction: row;
-    height: 200px;
+    min-height: 150px;
     padding-top: 15px;
-    border: 1px solid rgb(126, 114, 114);
+    border-bottom: 1px solid rgba(126, 114, 114, 0.3);
     border-radius: 2px;
+    box-sizing: border-box;
 }
 
 .blog_contain .left {
-    width: 40%;
+    width: 55%;
     height: 100%;
-
 }
 
 .blog_contain .right {
     margin-left: 30px;
-    width: calc(60% - 30px);
+    width: calc(45% - 30px);
     height: 100%;
+}
+
+.admin_popup_box {
+    background: #fff;
+}
+
+.layui-form .layui-form-label {
+    width: 135px;
+    box-sizing: border-box;
+}
+
+.layui-form .layui-input-block {
+    margin-left: 135px;
+}
+
+.ue_contain {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    padding-bottom: 200px;
+
+}
+
+.scroll_contain {
+    overflow-y: auto;
 }
