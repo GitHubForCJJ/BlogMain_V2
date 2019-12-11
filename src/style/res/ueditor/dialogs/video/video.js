@@ -270,8 +270,6 @@
 
         var conUrl = convert_url(url);
 
-        conUrl = utils.unhtmlForUrl(conUrl);
-
         $G("preview").innerHTML = '<div class="previewMsg"><span>'+lang.urlError+'</span></div>'+
         '<embed class="previewVideo" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"' +
             ' src="' + conUrl + '"' +
@@ -286,8 +284,8 @@
     function insertUpload(){
         var videoObjs=[],
             uploadDir = editor.getOpt('videoUrlPrefix'),
-            width = parseInt($G('upload_width').value, 10) || 420,
-            height = parseInt($G('upload_height').value, 10) || 280,
+            width = $G('upload_width').value || 420,
+            height = $G('upload_height').value || 280,
             align = findFocus("upload_alignment","name") || 'none';
         for(var key in uploadVideoList) {
             var file = uploadVideoList[key];
@@ -376,15 +374,7 @@
                 uploader,
                 actionUrl = editor.getActionUrl(editor.getOpt('videoActionName')),
                 fileMaxSize = editor.getOpt('videoMaxSize'),
-                acceptExtensions = (editor.getOpt('videoAllowFiles') || []).join('').replace(/\./g, ',').replace(/^[,]/, '');;
-
-            if (!WebUploader.Uploader.support()) {
-                $('#filePickerReady').after($('<div>').html(lang.errorNotSupport)).hide();
-                return;
-            } else if (!editor.getOpt('videoActionName')) {
-                $('#filePickerReady').after($('<div>').html(lang.errorLoadConfig)).hide();
-                return;
-            }
+                acceptExtensions = editor.getOpt('videoAllowFiles').join('').replace(/\./g, ',').replace(/^[,]/, '');;
 
             uploader = _this.uploader = WebUploader.create({
                 pick: {
@@ -395,7 +385,7 @@
                 server: actionUrl,
                 fileVal: editor.getOpt('videoFieldName'),
                 duplicate: true,
-                fileSingleSizeLimit: fileMaxSize,
+                fileSingleSizeLimit: fileMaxSize,    // 默认 2 M
                 compress: false
             });
             uploader.addButton({
@@ -750,12 +740,9 @@
 
             uploader.on('uploadError', function (file, code) {
             });
-            uploader.on('error', function (code, file) {
-                if (code == 'Q_TYPE_DENIED' || code == 'F_EXCEED_SIZE') {
-                    addFile(file);
-                }
+            uploader.on('Error', function (file, code) {
             });
-            uploader.on('uploadComplete', function (file, ret) {
+            uploader.on('UploadComplete', function (file, ret) {
             });
 
             $upload.on('click', function () {

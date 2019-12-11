@@ -67,9 +67,7 @@ public class UEditorHandler : IHttpHandler
                 action = new NotSupportedHandler(context);
                 break;
         }
-
-        //action.Process();
-        action.ProcessQiNiu();
+        action.Process();
     }
 
     public bool IsReusable

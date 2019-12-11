@@ -49,17 +49,17 @@ UE.I18N['en'] = {
     },
     'paragraph':{'p':'Paragraph', 'h1':'Title 1', 'h2':'Title 2', 'h3':'Title 3', 'h4':'Title 4', 'h5':'Title 5', 'h6':'Title 6'},
     'fontfamily':{
-        'songti':'Sim Sun',
-        'kaiti':'Sim Kai',
-        'heiti':'Sim Hei',
-        'lishu':'Sim Li',
-        'yahei': 'Microsoft YaHei',
-        'andaleMono':'Andale Mono',
+        'songti':'Sim sun',
+        'kaiti':'Sim kai',
+        'heiti':'Sim hei',
+        'lishu':'Sim li',
+        'yahei': 'Microsoft yahei',
+        'andaleMono':'Andale mono',
         'arial': 'Arial',
-        'arialBlack':'Arial Black',
-        'comicSansMs':'Comic Sans MS',
+        'arialBlack':'Arial black',
+        'comicSansMs':'Comic sans ms',
         'impact':'Impact',
-        'timesNewRoman':'Times New Roman'
+        'timesNewRoman':'Times new roman'
     },
     'customstyle':{
         'tc':'Title center',
@@ -72,16 +72,14 @@ UE.I18N['en'] = {
         'exceedTypeError': 'File Type Not Allow',
         'jsonEncodeError': 'Server Return Format Error',
         'loading':"loading...",
-        'loadError':"load error",
-        'errorLoadConfig': 'Server config not loaded, upload can not work.',
+        'loadError':"load error"
     },
     'simpleupload':{
         'exceedSizeError': 'File Size Exceed',
         'exceedTypeError': 'File Type Not Allow',
         'jsonEncodeError': 'Server Return Format Error',
         'loading':"loading...",
-        'loadError':"load error",
-        'errorLoadConfig': 'Server config not loaded, upload can not work.',
+        'loadError':"load error"
     },
     'elementPathTip':"Path",
     'wordCountTip':"Word Count",
@@ -92,39 +90,36 @@ UE.I18N['en'] = {
     'closeDialog':"closeDialog",
     'tableDrag':"You must import the file uiUtils.js before drag! ",
     'autofloatMsg':"The plugin AutoFloat depends on EditorUI!",
-    'loadconfigError': 'Get server config error.',
-    'loadconfigFormatError': 'Server config format error.',
-    'loadconfigHttpError': 'Get server config http error.',
     'snapScreen_plugin':{
         'browserMsg':"Only IE supported!",
         'callBackErrorMsg':"The callback data is wrong,please check the config!",
         'uploadErrorMsg':"Upload error,please check your server environment! "
     },
     'insertcode':{
-        'as3':'ActionScript 3',
+        'as3':'ActionScript3',
         'bash':'Bash/Shell',
         'cpp':'C/C++',
-        'css':'CSS',
-        'cf':'ColdFusion',
+        'css':'Css',
+        'cf':'CodeFunction',
         'c#':'C#',
         'delphi':'Delphi',
         'diff':'Diff',
         'erlang':'Erlang',
         'groovy':'Groovy',
-        'html':'HTML',
+        'html':'Html',
         'java':'Java',
-        'jfx':'JavaFX',
-        'js':'JavaScript',
+        'jfx':'JavaFx',
+        'js':'Javascript',
         'pl':'Perl',
-        'php':'PHP',
+        'php':'Php',
         'plain':'Plain Text',
         'ps':'PowerShell',
         'python':'Python',
         'ruby':'Ruby',
         'scala':'Scala',
-        'sql':'SQL',
-        'vb':'Visual Basic',
-        'xml':'XML'
+        'sql':'Sql',
+        'vb':'Vb',
+        'xml':'Xml'
     },
     'confirmClear':"Do you confirm to clear the Document?",
     'contextMenu':{
@@ -294,8 +289,6 @@ UE.I18N['en'] = {
         'updateStatusConfirm': '_ uploaded successfully and _ upload failed',
         'updateStatusFinish': 'Total _ pictures (_KB), _  uploaded successfully',
         'updateStatusError': ' and _ upload failed',
-        'errorNotSupport': 'WebUploader does not support the browser you are using. Please upgrade your browser or flash player',
-        'errorLoadConfig': 'Server config not loaded, upload can not work.',
         'errorExceedSize':'File Size Exceed',
         'errorFileType':'File Type Not Allow',
         'errorInterrupt':'File Upload Interrupted',
@@ -331,8 +324,6 @@ UE.I18N['en'] = {
         'updateStatusConfirm': '_ uploaded successfully and _ upload failed',
         'updateStatusFinish': 'Total _ files (_KB), _  uploaded successfully',
         'updateStatusError': ' and _ upload failed',
-        'errorNotSupport': 'WebUploader does not support the browser you are using. Please upgrade your browser or flash player',
-        'errorLoadConfig': 'Server config not loaded, upload can not work.',
         'errorExceedSize':'File Size Exceed',
         'errorFileType':'File Type Not Allow',
         'errorInterrupt':'File Upload Interrupted',
@@ -417,8 +408,6 @@ UE.I18N['en'] = {
         'updateStatusConfirm': '_ uploaded successfully and _ upload failed',
         'updateStatusFinish': 'Total _ files (_KB), _  uploaded successfully',
         'updateStatusError': ' and _ upload failed',
-        'errorNotSupport': 'WebUploader does not support the browser you are using. Please upgrade your browser or flash player',
-        'errorLoadConfig': 'Server config not loaded, upload can not work.',
         'errorExceedSize':'File Size Exceed',
         'errorFileType':'File Type Not Allow',
         'errorInterrupt':'File Upload Interrupted',
@@ -677,8 +666,5 @@ UE.I18N['en'] = {
             listBackgroundURL:'',
             buttonURL:'button.png'
         }
-    },
-    'autosave': {
-        'success':'Local conservation success'
     }
 };
