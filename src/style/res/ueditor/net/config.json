@@ -15,7 +15,7 @@
     /* 图片压缩最长边限制 */
     "imageInsertAlign": "none",
     /* 插入的图片浮动方式 */
-    "imageUrlPrefix": "http://image.cjj81.cn/",
+    "imageUrlPrefix": "http://q2c25d53h.bkt.clouddn.com/",
     /* 图片访问路径前缀 */
     "imagePathFormat": "upload/image/{yyyy}{mm}{dd}/{time}{rand:6}",
     /* 上传保存路径,可以自定义保存路径和文件名格式 */
@@ -61,9 +61,9 @@
     /* 执行抓取远程图片的action名称 */
     "catcherFieldName": "source",
     /* 提交的图片列表表单名称 */
-    "catcherPathFormat": "upload/image/{yyyy}{mm}{dd}/{time}{rand:6}",
+    "catcherPathFormat": "upload/catchimage/{yyyy}{mm}{dd}/{time}{rand:6}",
     /* 上传保存路径,可以自定义保存路径和文件名格式 */
-    "catcherUrlPrefix": "/ueditor/net/",
+    "catcherUrlPrefix": "",
     /* 图片访问路径前缀 */
     "catcherMaxSize": 2048000,
     /* 上传大小限制，单位B */

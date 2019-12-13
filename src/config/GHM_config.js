@@ -12,22 +12,10 @@ if (hostname == 'localhost' || hostname.indexOf('192.168.20') != -1) {
     // 本地环境
     GHM_BASE_API = 'http://cjjapi.blog.com/api';
     //GHM_BASE_API = 'http://192.168.20.35:9953/api';
-} else if (hostname == 'wdmain.dzxz.com') {
+} else if (hostname == 'cjjmain.blog.com') {
     // 内网环境
-    GHM_BASE_API = 'http://192.168.10.19:9953/api';
+    GHM_BASE_API = 'http://cjjapi.blog.com/api';
     GHM_PT_Domain = '.dzxz.com';
-} else if (hostname == 'admin.lieweiyou.cn') {
-    // 预发布环境
-    GHM_BASE_API = 'http://api.lieweiyou.cn/api';
-    GHM_PT_Domain = '.dongzouxizou.cn';
-} else if (hostname == 'admin.lieweiyou.com') {
-    // 正式环境
-    GHM_BASE_API = 'http://api.lieweiyou.com/api';
-    GHM_PT_Domain = '.dongzouxizou.com';
-} else if (hostname == 'testwdmain.dzxz.com') {
-    // 测试环境
-    GHM_BASE_API = 'http://testwdapi.dzxz.com/api';
-    GHM_PT_Domain = '.dongzouxizou.com';
 }
 GHM_config.reqBase = {
     AppId: '358811079015606',
