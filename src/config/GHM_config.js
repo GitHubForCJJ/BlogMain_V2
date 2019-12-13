@@ -33,4 +33,7 @@ GHM_config.url = {
     mobileLoginAPI: GHM_BASE_API + '/Comm/MobileLogin', //验证码登录
     GetQiNiuUploadToken: GHM_BASE_API + '/Comm/GetQiNiuUploadToken', //七牛云上传token
 
+    GetListBlog: GHM_BASE_API + '/AdminBlog/GetListBlog', //获取博客list
+    GetItemBlog: GHM_BASE_API + '/AdminBlog/GetItemBlog', //获取博客list
+
 }

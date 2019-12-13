@@ -6,7 +6,7 @@
  @License：GPL-2
     
  */
-layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'element', 'GHM', 'admin', 'view', 'GHM_log', 'formSelects'], function (exports) {
+layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], function (exports) {
     var $ = layui.$,
         layer = layui.layer,
         admin = layui.admin,
@@ -15,35 +15,8 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
         $ = layui.$,
         table = layui.table,
         laydate = layui.laydate,
-        GHM_log = layui.GHM_log,
-        GHM_Crop = layui.GHM_Crop,
         form = layui.form;
 
-    layer.msg("a");
-    console.info("a")
-
-
-    GHM.post(GHM_config.url.GetAllAdAndMaxSort, {
-        Data: '{}'
-    }).then(function (res) {
-        $.each(res.Data.Adlocations, function (index, val) {
-            var option = " <option  value='" + val.KID + "'>" + val.LocationName +
-                "</option>"
-            $("#SLocation").append(option);
-        });
-        $.each(res.Data.Channels, function (index, val) {
-            var option = " <option  value='" + val.PlaceId + "'>" + val.PlaceName +
-                "</option>"
-            $("#PlaceId").append(option);
-        });
-
-        form.render('select');
-    }).catch(function (error) {
-        var msg = '';
-        if (error.Msg) msg = error.Msg;
-        else msg = '执行失败，服务器未返回失败信息';
-        layer.msg(msg);
-    });
 
     var checkdata = function () {
         //return true;
@@ -108,10 +81,11 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
     //数据渲染加载
     table.render({
         elem: '#LAY-Blog-manage',
-        url: GHM_config.url.GetListAdvert, //模拟接口
+        url: GHM_config.url.GetListBlog, //模拟接口
         method: 'post',
         where: GHM.PwdData(),
         parseData: function (res) { //res 即为原始返回的数据
+            console.log(res)
             res = GHM.UnPwdData(res);
             return {
                 'code': res.Code,
@@ -123,48 +97,68 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
         cols: [
             [{
                 field: 'KID',
-                width: 150,
+                width: 50,
                 title: 'KID',
                 align: 'center'
             }, {
+                field: 'BlogNum',
+                width: 100,
+                title: '博客编号',
+                sort: true,
+                align: 'center'
+            },
+            {
+                field: 'Extend4',
+                width: 140,
+                title: '博客类型',
+                align: 'center'
+            }, {
                 field: 'Title',
-                width: 150,
+                width: 350,
                 title: '标题',
                 align: 'center'
             }, {
-                field: 'DetailTitle',
+                field: 'Blogimg',
                 width: 150,
-                title: '长标题',
-                align: 'center'
-            }, {
-                field: 'Sorc',
-                width: 150,
-                title: '博客序号',
-                sort: true,
-                align: 'center'
-            }, {
-                field: 'ImgUrlPath',
-                width: 250,
                 title: '博客图片',
-                templet: '#temp_Blog_ImgUrlPath',
-                align: 'center'
+                templet: '#table-Blog-blogimg'
             }, {
                 field: 'CreateTime',
-                width: 250,
+                width: 150,
                 title: '创建时间',
+                sort: true,
+                align: 'center'
+            },
+            {
+                field: 'Start',
+                width: 100,
+                title: '点赞',
+                sort: true,
+                align: 'center'
+            },
+            {
+                field: 'Views',
+                width: 150,
+                title: '查看次数',
+                sort: true,
+                align: 'center'
+            },
+            {
+                field: 'Comments',
+                width: 100,
+                title: '评论',
                 sort: true,
                 align: 'center'
             }, {
                 field: 'States',
-                width: 150,
-                title: '博客状态',
-                templet: '#temp_Advert_States',
+                width: 160,
+                title: '状态',
+                templet: "#temp_Blog_States",
                 align: 'center'
             }, {
                 title: '操作',
-                minWidth: 300,
-                align: 'center',
-                toolbar: '#table-Advert-operation',
+                minWidth: 200,
+                toolbar: '#table-Blog-operation',
                 align: 'center'
             }]
         ],
@@ -181,7 +175,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
         field.where = data.field;
         console.log(field)
         //执行重载
-        table.reload('LAY-Advert-manage', {
+        table.reload('LAY-Blog-manage', {
             where: GHM.PwdData({
                 Data: JSON.stringify(field)
             }),
@@ -201,14 +195,14 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
     });
 
     //监听排序
-    table.on('sort(LAY-Advert-manage)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+    table.on('sort(LAY-Blog-manage)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         var ascdesc = "asc";
         if (obj.type == "desc") {
             ascdesc = "desc";
         }
         var field = {};
         field.orderby = obj.field + " " + ascdesc;
-        table.reload('LAY-Advert-manage', {
+        table.reload('LAY-Blog-manage', {
             initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。 layui 2.1.1 新增参数
             ,
             where: GHM.PwdData({
@@ -232,69 +226,19 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
                         format: 'yyyy-MM-dd HH:mm:ss'
                     })
                 });
+                var width = $(".ue_contain").width();
+                console.log(width);
 
-                //上传广告图片
-                var $imgBox = $('#upload-box1 .img-box');
-
-                $("#upload-btn1").click(function () {
-                    $('#upadpic').click();
-                })
-                $('#upadpic').change(function () {
-                    if (!this.files.length) return;
-
-                    GHM_Crop.drag(this, {}, {
-                        folder: 'advert'
-                    }).then(function (files) {
-                        console.log(files);
-                        layer.close(layer.index);
-                        $("#upload-btn1").hide();
-                        $("#upload-box1 .img-box li").remove();
-                        var htm = '<li class="item">' +
-                            '<img src=' + files + '>' +
-                            '<i class="close" id="close1"></i>'
-                        '</li>';
-                        $imgBox.append(htm);
-                    })
+                UE.delEditor('ueditor');
+                var ue = UE.getEditor('ueditor', {
+                    // autoHeightEnabled: true,
+                    // autoFloatEnabled: true
+                    initialFrameWidth: width - 60,
+                    initialFrameHeight: 540,
+                    autoHeightEnabled: false
                 });
 
-                $(document).on('click', '#close1', function () {
-                    $("#upload-btn1").show();
-                    // 删除
-                    $(this).parent('.item').remove();
-                })
 
-                //跳转图片
-                var $imgBox2 = $('#upload-box2 .img-box');
-                $("#upload-btn2").click(function () {
-                    $('#uptzpic').click();
-                })
-                $('#uptzpic').change(function () {
-                    layui.GHM_upload(this, {
-                        folder: 'advert'
-                    }).then(function (files) {
-                        $("#upload-btn2").hide();
-                        $("#upload-box2 .img-box li").remove();
-                        var htm2 = '';
-                        console.log('files:', files);
-                        for (var i = 0; i < files.length; i++) {
-                            htm2 += '<li class="item">' +
-                                '<img src=' + files[i] + '>' +
-                                '<i class="close" id="close2"></i>'
-                            '</li>';
-                        }
-                        $imgBox2.append(htm2);
-                    }).catch(function (error) {
-                        var msg = '';
-                        if (error.Msg) msg = error.Msg;
-                        else msg = '上传失败，请重试！';
-                        layer.msg(msg);
-                    })
-                });
-                $(document).on('click', '#close2', function () {
-                    $("#upload-btn2").show();
-                    // 删除
-                    $(this).parent('.item').remove();
-                })
                 form.render(null, 'LAY-edit-Advert-submit');
                 //监听add提交
                 form.on('submit(LAY-add-Advert-submit)', function (data) {
@@ -347,9 +291,6 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
         }
     };
 
-
-
-
     //事件注册
     $(document).on('click', '.layui-btn.layuiadmin-btn-Advert', function () {
         var type = $(this).data('type');
@@ -357,115 +298,38 @@ layui.define(['table', 'layer', 'form', 'jquery', 'GHM_Crop', 'laydate', 'elemen
     });
 
     //监听工具条
-    table.on('tool(LAY-Advert-manage)', function (obj) {
+    table.on('tool(LAY-Blog-manage)', function (obj) {
         var data = obj.data;
         var kid = data.KID;
         if (obj.event == 'edit') {
-            GHM_Core.fullPopup('编辑广告信息', 'advert/addOrEdit', data, function () {
+            GHM_Core.fullPopup('编辑博客信息', 'blog/addOrEdit', data, function () {
 
-                lay('.show_date').each(function () {
-                    laydate.render({
-                        elem: this,
-                        type: 'datetime',
-                        format: 'yyyy-MM-dd HH:mm:ss'
+                var width = $(".ue_contain").width();
+
+                UE.delEditor('ueditor');
+                var ue = UE.getEditor('ueditor', {
+                    // autoHeightEnabled: true,
+                    // autoFloatEnabled: true
+                    initialFrameWidth: width - 60,
+                    initialFrameHeight: 540,
+                    autoHeightEnabled: false
+                });
+
+                GHM.post(GHM_config.url.GetItemBlog,
+                    { "Data": JSON.stringify({ "Num": data.BlogNum }) }
+                ).then(function (res) {
+                    console.log(res)
+                    ue.ready(function () {
+                        ue.setContent(res.Data.Content)
                     })
-                });
-                console.log(data);
-                // 设置margin
-                setMargin();
-                //显示隐藏产品
-                showprodiv();
-                //查询商品
-                querypro();
-                //选择产品
-                choosepro();
 
-                if (data.AdType == 2) {
-                    queproapi();
-                }
-                $(".select_proid").val(data.ProId);
-                //初始化产品图片
-                $(".select_img").attr('src', data.Extend5);
-                //初始化产品名称
-                $(".select_name").text(data.Extend4);
-                //初始化产品编号
-                $(".select_prono").text(data.Extend6);
-                $(".Extend4").val(data.Extend4);
-                $(".Extend5").val(data.Extend5);
-                $(".Extend6").val(data.Extend6);
-
-                var $cropMsg = $('#cropMsg');
-                var LocationId = data.LocationId;
-                // 建议尺寸
-                // if (LocationId == 1) {
-                //     $cropMsg.text('建议尺寸750*428像素');
-                // } else {
-                //     $cropMsg.text('建议尺寸346*180像素');
-                // }
-                //上传广告图片
-                var $imgBox = $('#upload-box1 .img-box');
-                $("#upload-btn1").click(function () {
-                    $('#upadpic').click();
+                }).catch(function (err) {
+                    console.log(err)
                 })
-                $('#upadpic').change(function () {
-                    if (!this.files.length) return;
-
-                    GHM_Crop.drag(this, {}, {
-                        folder: 'advert'
-                    }).then(function (files) {
-                        console.log(files);
-                        layer.close(layer.index);
-                        $("#upload-btn1").hide();
-                        $("#upload-box1 .img-box li").remove();
-                        var htm = '<li class="item">' +
-                            '<img src=' + files + '>' +
-                            '<i class="close" id="close1"></i>'
-                        '</li>';
-                        $imgBox.append(htm);
-                    })
-                });
-                $(document).on('click', '#close1', function () {
-                    $("#upload-btn1").show();
-                    // 删除
-                    $(this).parent('.item').remove();
-                });
-                var $imgBox2 = $('#upload-box2 .img-box');
-                $("#upload-btn2").click(function () {
-                    $('#uptzpic').click();
-                })
-                $('#uptzpic').change(function () {
-                    layui.GHM_upload(this, {
-                        folder: 'advert'
-                    })
-                        .then(function (files) {
-                            $("#upload-btn2").hide();
-                            //当从跳转连接切换到跳转图片时，清楚UL里面原本的那个li
-                            $("#upload-box2 .img-box li").remove();
-                            var htm2 = '';
-                            for (var i = 0; i < files.length; i++) {
-                                htm2 += '<li class="item">' +
-                                    '<img src=' + files[i] + '>' +
-                                    '<i class="close" id="close2"></i>'
-                                '</li>';
-                            }
-                            $imgBox2.append(htm2);
-                        })
-                        .catch(function (error) {
-                            var msg = '';
-                            if (error.Msg) msg = error.Msg;
-                            else msg = '上传失败，请重试！';
-                            layer.msg(msg);
-                        })
-                });
-                $(document).on('click', '#close2', function () {
-                    $("#upload-btn2").show();
-                    // 删除
-                    $(this).parent('.item').remove();
-                })
-                form.render(null, 'LAY-edit-Advert-submit');
 
                 //监听提交
-                form.on('submit(LAY-edit-Advert-submit)', function (data) {
+                form.on('submit(LAY-Blog-add)', function (data) {
+                    console.log(data);
                     if (checkdata()) {
                         //获取提交的字段
                         var field = {};

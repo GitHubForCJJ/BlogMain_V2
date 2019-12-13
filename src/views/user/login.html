@@ -112,6 +112,10 @@
               key: 'Model',
               value: res.Data.Model
             });
+            layui.data(setter.tableName, {
+              key: 'dataIsEncrypt',
+              value: false
+            });
             layer.msg('登录成功', {
               offset: '15px',
               icon: 1,
