@@ -1,62 +1,82 @@
-<!-- 添加、编辑员工 -->
 <title>添加编辑文章</title>
 <script type="text/html" template>
     <link rel="stylesheet" href="{{ layui.setter.base }}style/blog/addOrEdit.css" media="all">
 </script>
-<div class="admin_popup_box">
-    <div class="scroll_contain">
-        <div class="layui-form">
-            <div class="blog_contain">
-                <div class="left">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">文章类型</label>
-                            <div class="layui-input-block">
-                                <select id='' class="layui-select" name="Type">
-                                    <option value=""></option>
-                                    <option value="">类型1</option>
-                                    <option value="">类型2</option>
-                                </select>
-                            </div>
+<div class="addoreditform">
+    <div class="layui-form" class="" lay-filter="LAY-addoredit-blog">
+        <div class="blog_contain">
+            <div class="left">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">文章类型</label>
+                        <div class="layui-input-block">
+                            <select id='category' class="layui-select" lay-filter='categoryType' name="Type"
+                                style="z-index: 999;">
+                                <option value=""></option>
+                            </select>
                         </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">原创地址</label>
-                            <div class="layui-input-block">
-                                <input type="text" style="width: 350px;" name="adname|l" placeholder="请输入"
-                                    autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">是否原创</label>
-                            <div class="layui-input-block">
-                                <select id='' class="layui-select" name="Type">
-                                    <option value="0">是</option>
-                                    <option value="1">否</option>
-                                </select>
-                            </div>
-                        </div>
-
-
                     </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="Title" style="width: 450px;" id="OriginalUrl" name="Title"
+                                placeholder="请输入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">是否原创</label>
+                        <div class="layui-input-block">
+                            <select id='IsOriginal' class="layui-select" name="IsOriginal">
+                                <option value="0">是</option>
+                                <option value="1">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+
                 </div>
-                <div class="right">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">是否置顶</label>
+                        <div class="layui-input-block">
+                            <select id='IsTop' class="layui-select" name="IsTop">
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">原创地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" style="width: 450px;" id="OriginalUrl" name="OriginalUrl"
+                                placeholder="请输入" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
 
                 </div>
             </div>
+            <div class="right">
+
+            </div>
         </div>
         <!-- 富文本 -->
-        <div class="ue_contain">
+        <div class="ue_contain" style="z-index: 0;">
             <script id="ueditor" name="ueditor" type="text/plain">
 
             </script>
         </div>
-        <div class="btn_area" style="border:none">
+        <!-- 博客编号 -->
+        <input type="hidden" name="num">
+
+        <div class="mybtnarea" style="border:none">
             <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-Blog-add">确定</a>
             <a href="javascript:" class="layui-btn layui-btn-cancel" onclick="layer.closeAll()">取消</a>
         </div>
     </div>
-
 </div>
+
+
+
 
 
 <script>
@@ -75,11 +95,11 @@
         form.render();
 
 
-        form.on('submit(LAY-Blog-add)', function (data) {
-            var field = data.field;
-            var content = gethtml();
+        // form.on('submit(LAY-Blog-add)', function (data) {
+        //     var field = data.field;
+        //     var content = gethtml();
 
-            $(".layui-table-box .layui-table-fixed").remove();
-        });
+        //     $(".layui-table-box .layui-table-fixed").remove();
+        // });
     });
 </script>

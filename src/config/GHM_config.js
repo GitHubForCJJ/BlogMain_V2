@@ -34,6 +34,10 @@ GHM_config.url = {
     GetQiNiuUploadToken: GHM_BASE_API + '/Comm/GetQiNiuUploadToken', //七牛云上传token
 
     GetListBlog: GHM_BASE_API + '/AdminBlog/GetListBlog', //获取博客list
-    GetItemBlog: GHM_BASE_API + '/AdminBlog/GetItemBlog', //获取博客list
+    GetItemBlog: GHM_BASE_API + '/AdminBlog/GetItemBlog', //获取博客item
+    AddItemBlog: GHM_BASE_API + '/AdminBlog/AddItemBlog', //添加博客item
+    UpdateItemBlog: GHM_BASE_API + '/AdminBlog/UpdateItemBlog', //添加博客item
+
+    GetListCartgory: GHM_BASE_API + '/Category/GetListCartgory', //获取博客类型
 
 }

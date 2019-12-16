@@ -1,21 +1,29 @@
+.addoreditform {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
 .blog_contain {
     display: flex;
     flex-direction: row;
-    min-height: 150px;
+    min-height: 110px;
     padding-top: 15px;
     border-bottom: 1px solid rgba(126, 114, 114, 0.3);
     border-radius: 2px;
     box-sizing: border-box;
+
 }
 
 .blog_contain .left {
-    width: 55%;
+    width: 75%;
     height: 100%;
 }
 
 .blog_contain .right {
     margin-left: 30px;
-    width: calc(45% - 30px);
+    width: calc(25% - 30px);
     height: 100%;
 }
 
@@ -24,22 +32,37 @@
 }
 
 .layui-form .layui-form-label {
-    width: 135px;
+    width: 100px;
     box-sizing: border-box;
 }
 
 .layui-form .layui-input-block {
-    margin-left: 135px;
+    margin-left: 100px;
 }
 
 .ue_contain {
     width: 100%;
-    padding: 30px;
+    padding-top: 12px;
+    padding-right: 20px;
+    padding-left: 20px;
     box-sizing: border-box;
-
-
 }
 
-.scroll_contain {
-    overflow-y: auto;
+.addoreditform .mybtnarea {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    text-align: center;
+    font-size: 0;
+    height: 36px;
+    padding: 14px 0;
+    border-top: 1px solid #E8E8E8;
+}
+
+.mybtnarea .layui-btn {
+    width: 98px;
+    height: 36px;
+    margin: 0 12px;
 }

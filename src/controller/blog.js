@@ -1,6 +1,6 @@
 /**
 
- @Name：layuiAdmin 会员管理
+ @Name：layuiAdmin 博客管理
  @Author：star1029
  @Site：http://www.layui.com/admin/
  @License：GPL-2
@@ -16,59 +16,31 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
         table = layui.table,
         laydate = layui.laydate,
         form = layui.form;
+    var myUeditor = "";
 
 
-    var checkdata = function () {
+    var checkdata = function (data) {
         //return true;
-        if ($('#AdName').val().length == 0) {
-            layer.msg('请输入广告名称！');
-            $('#AdName').focus();
+        if (data.Type.length == 0) {
+            layer.msg('请选择博客类型！');
             return false;
         }
-        if ($('#SortNums').val().length == 0) {
-            layer.msg('请输入广告序号！');
-            $('#SortNums').focus();
+        if (data.Title.length == 0) {
+            layer.msg('标题不能为空');
+            $('#Title').focus();
+            return false;
+        }
+        if (data.IsOriginal == 1 && data.OriginalUrl.length == 0) {
+            layer.msg('请输入原创地址！');
+            $('#OriginalUrl').focus();
+            return false;
+        }
+        var editorHtml = getUeditorHtml();
+        if (editorHtml.length == 0) {
+            layer.msg('请输入博客内容！');
             return false;
         }
 
-        var adshowtype = $("#AdShowType:checked").val();
-        if (adshowtype == 1) {
-            var startdate = $("#showtimebegin").val();
-            var enddate = $("#showtimeend").val();
-            if (startdate == '' || enddate == '') {
-                layer.msg('请选择时间段');
-                return false;
-            }
-            var d1 = Date.parse(startdate);
-            var d2 = Date.parse(enddate);
-            if (d1 > d2) {
-                layer.msg('广告时段不合法，开始时间大于结束时间');
-                return false;
-            }
-        }
-
-        var rrr = $("#ClickUrl").val();
-        if ($("#AdTypevalue").val() == 0) {
-            if (rrr.length < 4 || rrr.substr(0, 4).toLowerCase() != 'http') {
-                layer.msg('请输入正确的广告链接！');
-                $("#ClickUrl").focus();
-                return false;
-            }
-        }
-        var ImgUrlPatharr = getUrl($("#img-box1"));
-        if (ImgUrlPatharr.length == 0) {
-            layer.msg('请上传广告图片！');
-            return false;
-        }
-        var clickimgs = getUrl($("#img-box2"));
-        if ($("#AdTypevalue").val() == 1 && clickimgs.length == 0) {
-            layer.msg('请上传跳转图片！');
-            return false;
-        }
-        if ($("#AdTypevalue").val() == 2 && $(".select_proid").val() == '') {
-            layer.msg("请选择产品");
-            return false;
-        }
         return true;
     }
     //laydate init
@@ -97,7 +69,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
         cols: [
             [{
                 field: 'KID',
-                width: 50,
+                width: 70,
                 title: 'KID',
                 align: 'center'
             }, {
@@ -114,17 +86,17 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                 align: 'center'
             }, {
                 field: 'Title',
-                width: 350,
+                width: 300,
                 title: '标题',
                 align: 'center'
             }, {
                 field: 'Blogimg',
-                width: 150,
+                width: 120,
                 title: '博客图片',
                 templet: '#table-Blog-blogimg'
             }, {
                 field: 'CreateTime',
-                width: 150,
+                width: 200,
                 title: '创建时间',
                 sort: true,
                 align: 'center'
@@ -138,7 +110,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
             },
             {
                 field: 'Views',
-                width: 150,
+                width: 140,
                 title: '查看次数',
                 sort: true,
                 align: 'center'
@@ -151,13 +123,13 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                 align: 'center'
             }, {
                 field: 'States',
-                width: 160,
+                width: 120,
                 title: '状态',
                 templet: "#temp_Blog_States",
                 align: 'center'
             }, {
                 title: '操作',
-                minWidth: 200,
+                minWidth: 150,
                 toolbar: '#table-Blog-operation',
                 align: 'center'
             }]
@@ -215,6 +187,30 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
         $(".layui-table-box .layui-table-fixed").remove();
     });
 
+    //添加博客类型
+    var addCategory = function () {
+        GHM.post(GHM_config.url.GetListCartgory, {
+            Data: {}
+        }).then(function (res) {
+            console.log(res.Data.length);
+            if (res.Data.length > 0) {
+                for (var i in res.Data) {
+                    var html = "<option value='" + res.Data[i].KID + "'>" + res.Data[i].Name + "</option>"
+                    $("#category").append(html);
+                }
+                form.render();
+            }
+
+        }).catch(function (error) {
+            //layer.closeAll();
+            var msg = '';
+            if (error.Msg) msg = error.Msg;
+            else msg = '执行失败，服务器未返回失败信息';
+            layer.msg(msg);
+        });
+
+    }
+
     //事件
     var active = {
         add: function () {
@@ -226,60 +222,42 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                         format: 'yyyy-MM-dd HH:mm:ss'
                     })
                 });
-                var width = $(".ue_contain").width();
-                console.log(width);
+                form.render();
+                // var addoreditformwidth = $(".addoreditform").height();
+                // console.log(addoreditformwidth)
+                // var bcheight = $(".blog_contain").height();
+                // var btnheight = $(".mybtnarea").height();
 
-                UE.delEditor('ueditor');
-                var ue = UE.getEditor('ueditor', {
-                    // autoHeightEnabled: true,
-                    // autoFloatEnabled: true
-                    initialFrameWidth: width - 60,
-                    initialFrameHeight: 540,
-                    autoHeightEnabled: false
-                });
+                //处理ue呈现
+                addUeditor();
+                //添加博客类型
+                addCategory();
+                var addoreditformwidth = $(".addoreditform").innerHeight();
+                console.log(addoreditformwidth)
 
-
-                form.render(null, 'LAY-edit-Advert-submit');
-                //监听add提交
-                form.on('submit(LAY-add-Advert-submit)', function (data) {
+                //监听添加提交
+                form.on('submit(LAY-Blog-add)', function (data) {
                     //检查为空
-                    if (checkdata()) {
-                        //获取提交的字段
-                        var fields = {};
-                        fields = data.field;
-                        console.log(fields)
-                        //获取广告图片地址
-                        var ele = $("#img-box1");
-                        var ImgUrlPath = getUrl(ele);
-                        fields.ImgUrlPath = '';
+                    console.log(data)
+                    if (checkdata(data.field)) {
 
-                        fields.ImgUrlPath = ImgUrlPath[0];
+                        var content = myUeditor.getContent();
+                        data.field.Content = content;
+                        console.log(data.field)
 
-                        if (data.field.AdType == '1') {
-
-                            //类型为跳转时才 获取跳转图片地址
-                            var ele2 = $("#img-box2");
-
-                            var ClickUrl2 = getUrl(ele2);
-                            fields.ClickUrl = '';
-
-                            fields.ClickUrl = ClickUrl2[0];
-                        }
                         var loadidx = layer.msg('添加中...', {
                             icon: 16,
                             shade: [0.5, '#000'],
                             time: false //取消自动关闭
                         });
-
-
-                        GHM.post(GHM_config.url.AddItemAdvert, {
-                            Data: JSON.stringify(fields)
+                        GHM.post(GHM_config.url.AddItemBlog, {
+                            Data: JSON.stringify({ update: data.field })
                         }).then(function (res) {
                             layer.closeAll();
                             layer.msg("添加成功")
-                            GHM_Core.reloadTable('LAY-Advert-manage');
+                            GHM_Core.reloadTable('LAY-Blog-manage');
                         }).catch(function (error) {
-                            //layer.closeAll();
+                            layer.close(loadidx);
                             var msg = '';
                             if (error.Msg) msg = error.Msg;
                             else msg = '执行失败，服务器未返回失败信息';
@@ -290,6 +268,25 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
             });
         }
     };
+
+    function addUeditor () {
+
+        var width = $(".blog_contain").width();
+        myUeditor = "";
+
+        UE.delEditor('ueditor');
+        myUeditor = UE.getEditor('ueditor', {
+            autoHeightEnabled: true,
+            // autoFloatEnabled: true
+            initialFrameWidth: width - 40,
+            initialFrameHeight: 520,
+            autoHeightEnabled: false,
+            zIndex: 1,
+            fullScreen: true
+
+        });
+
+    }
 
     //事件注册
     $(document).on('click', '.layui-btn.layuiadmin-btn-Advert', function () {
@@ -303,24 +300,23 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
         var kid = data.KID;
         if (obj.event == 'edit') {
             GHM_Core.fullPopup('编辑博客信息', 'blog/addOrEdit', data, function () {
-
-                var width = $(".ue_contain").width();
-
-                UE.delEditor('ueditor');
-                var ue = UE.getEditor('ueditor', {
-                    // autoHeightEnabled: true,
-                    // autoFloatEnabled: true
-                    initialFrameWidth: width - 60,
-                    initialFrameHeight: 540,
-                    autoHeightEnabled: false
-                });
+                addCategory();
+                //处理ue呈现
+                addUeditor();
 
                 GHM.post(GHM_config.url.GetItemBlog,
                     { "Data": JSON.stringify({ "Num": data.BlogNum }) }
                 ).then(function (res) {
                     console.log(res)
-                    ue.ready(function () {
-                        ue.setContent(res.Data.Content)
+                    $("#category").val(res.Data.Type);
+                    $("#IsOriginal").val(res.Data.IsOriginal);
+                    $("#IsTop").val(res.Data.IsTop);
+                    $("#Title").val(res.Data.Title);
+                    $("input[name='num']").val(res.Data.BlogNum);
+                    form.render('select')
+
+                    myUeditor.ready(function () {
+                        myUeditor.setContent(res.Data.Content)
                     })
 
                 }).catch(function (err) {
@@ -330,37 +326,26 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                 //监听提交
                 form.on('submit(LAY-Blog-add)', function (data) {
                     console.log(data);
-                    if (checkdata()) {
+                    if (checkdata(data.field)) {
                         //获取提交的字段
                         var field = {};
                         field.update = data.field;
-                        field.kid = kid;
+                        field.update.Content = getUeditorHtml();
+                        field.num = data.field.num;
 
-                        //获取广告图片地址
-                        var ele = $("#img-box1");
-                        var ImgUrlPath = getUrl(ele);
-                        data.field.ImgUrlPath = ImgUrlPath[0];
-
-                        if (data.field.AdType == '1') {
-                            //类型为跳转时才 获取跳转图片地址
-                            var ele2 = $("#img-box2");
-                            var ClickUrls = getUrl(ele2);
-                            field.update.ClickUrl = '';
-                            field.update.ClickUrl = ClickUrls[0];
-                        }
-                        var loadidx = layer.msg('添加中...', {
+                        var loadidx = layer.msg('修改中...', {
                             icon: 16,
                             shade: [0.5, '#000'],
                             time: false //取消自动关闭
                         });
 
-                        GHM.post(GHM_config.url.UpdateItemAdvert, {
+                        GHM.post(GHM_config.url.UpdateItemBlog, {
                             Data: JSON.stringify(field)
                         }).then(function (res) {
                             console.log(res)
                             layer.closeAll();
                             layer.msg("编辑成功")
-                            GHM_Core.reloadTable('LAY-Advert-manage');
+                            GHM_Core.reloadTable('LAY-Blog-manage');
                         }).catch(function (error) {
                             //layer.closeAll();
                             var msg = '';
@@ -373,7 +358,8 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
             });
 
 
-        } else if (obj.event == "del") {
+        }
+        else if (obj.event == "del") {
             layer.confirm('确定删除该数据？删除后不可恢复！', function (index) {
                 var loadidx = layer.msg('删除中...', {
                     icon: 16,
@@ -410,55 +396,8 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                     layer.msg(msg);
                 })
             });
-        } else if (obj.event == "startstop1") {
-            var msg, stitle, state;
-            if (data.States == 0) {
-                state = 1;
-                stitle = '禁用';
-                msg = '确定禁用广告？禁用后不在显示';
-            } else {
-                state = 0;
-                stitle = '启用';
-                msg = '确定启用广告？'
-            }
-            layer.confirm(msg, {
-                title: stitle
-            }, function (index) {
-
-                var field = {};
-                field.kid = kid;
-                field.update = {
-                    States: state
-                };
-
-                GHM.post(GHM_config.url.UpdateItemAdvert, {
-                    Data: JSON.stringify(field)
-                }).then(function (res) {
-                    //layer.close(loadidx);
-                    if (res.Code == 0) {
-                        layer.msg(res.Msg);
-                        var btnrefresh = window.parent.document.getElementsByClassName('layui-laypage-btn')[0];
-                        if (btnrefresh == null) {
-                            layui.table.reload('LAY-Advert-manage');
-                        } else {
-                            btnrefresh.click();
-                        }
-                    } else {
-                        if (res.Msg == "") {
-                            layer.msg("执行失败,服务器未返回原因");
-                        } else {
-                            layer.msg(res.Msg);
-                        }
-                    }
-                }).catch(function (error) {
-                    //layer.closeAll();
-                    var msg = '';
-                    if (error.msg) msg = error.msg;
-                    else msg = '执行失败，服务器未返回失败信息';
-                    layer.msg(msg);
-                });
-            });
-        } else if (obj.event == "log") {
+        }
+        else if (obj.event == "log") {
             // 日志
             var log = {};
             log.kid = data.KID;
@@ -501,16 +440,9 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
         }
     });
 
-    //获取上传的图片
-    function getUrl (elm, arr) {
-        arr = [];
-        elm.find('.item').each(function (index, item) {
-            var src = $(item).find('img').attr('src');
-            if (src != null && src.trim() != "" && src.trim() != " " && src != undefined && src != 'undefined') {
-                arr.push(src);
-            }
-        });
-        return arr;
+    //获取ueditor内容
+    function getUeditorHtml () {
+        return myUeditor.getContent();
     }
 
     //监听状态切换

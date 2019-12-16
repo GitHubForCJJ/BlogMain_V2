@@ -70,7 +70,11 @@
     </script>
     <script type="text/html" id="table-Blog-blogimg">
         <div class="img" style='width:50px;height:40px;'>
+            {{# if(d.Blogimg.length>0){ }}
             <img src={{ d.Blogimg }} alt="博客图片路径" class="show_img" />
+            {{# }else{  }}
+            
+            {{#}  }}
         </div>
 
     </script>

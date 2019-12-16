@@ -1,0 +1,16 @@
+=====================
+2019-12-16 11:49:52  D错误事件
+************************Exception Start************************
+Exception Remark：Process
+Exception Date:2019-12-16 11:49:51
+Exception Type:System.Web.HttpException
+Exception Message:超过了最大请求长度。
+Exception Source:System.Web
+Exception StackTrace:   在 System.Web.HttpRequest.GetEntireRawContent()
+   在 System.Web.HttpRequest.GetMultipartContent()
+   在 System.Web.HttpRequest.FillInFilesCollection()
+   在 System.Web.HttpRequest.EnsureFiles()
+   在 System.Web.HttpRequest.get_Files()
+   在 Ueditor.MyUploadHandler.Process() 位置 C:\Users\Administrator\Documents\WeChat Files\chenjianjun199381\FileStorage\File\2019-12\Ueditor\Ueditor\AppCode\MyUploadHandler.cs:行号 41
+************************Exception End**************************
+
