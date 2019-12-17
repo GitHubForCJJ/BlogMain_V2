@@ -344,6 +344,7 @@ GHM_Core.fullPopup = function (tit, url, data, fn) {
     title: tit,
     area: [width + 'px', height + 'px'],
     offset: ['50px', '220px'],
+    zIndex: 998,
     success: function (layero, index) {
       //传入当前行的数据
       layui.view(this.id).render(url, data).done(fn);
