@@ -281,7 +281,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
             initialFrameWidth: width - 40,
             initialFrameHeight: 520,
             autoHeightEnabled: false,
-
+            zIndex: 1000,
             fontsize: [10, 11, 12, 14, 16, 18, 20, 24, 36],
             fontfamily: [
                 { label: '', name: 'songti', val: '宋体,SimSun' },
