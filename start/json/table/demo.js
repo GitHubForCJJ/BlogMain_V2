@@ -1,6 +1,6 @@
 
 {
-  "Code": 0
+  "code": 0
   ,"msg": ""
   ,"count": 3000000
   ,"data": [{
@@ -61,7 +61,7 @@
     ,"joinTime": "2016-10-14"
   }, {
     "id": "10006"
-    ,"username": "东走西走"
+    ,"username": "贤心"
     ,"email": "xianxin@layui.com"
     ,"sex": "男"
     ,"city": "浙江杭州"
@@ -72,7 +72,7 @@
     ,"joinTime": "2016-10-14"
   }, {
     "id": "10007"
-    ,"username": "东走西走"
+    ,"username": "贤心"
     ,"email": "xianxin@layui.com"
     ,"sex": "男"
     ,"city": "浙江杭州"
@@ -83,7 +83,7 @@
     ,"joinTime": "2016-10-14"
   }, {
     "id": "10008"
-    ,"username": "东走西走"
+    ,"username": "贤心"
     ,"email": "xianxin@layui.com"
     ,"sex": "男"
     ,"city": "浙江杭州"

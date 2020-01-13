@@ -1,7 +1,7 @@
 /**
 
  @Name：layuiAdmin 核心模块
- @Author：Rodman
+ @Author：东走西走
  @Site：http://www.layui.com/admin/
  @License：LPPL
     
@@ -208,8 +208,9 @@ layui.define('view', function(exports){
         '.layui-side-menu,'
         ,'.layadmin-pagetabs .layui-tab-title li:after,'
         ,'.layadmin-pagetabs .layui-tab-title li.layui-this:after,'
-        ,'.layui-layer-admin .layui-layer-title,'
+        // ,'.layui-layer-admin .layui-layer-title,'
         ,'.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child'
+        , '.layui-nav-itemed>.layui-nav-child'
         ,'{background-color:{{d.color.main}} !important;}'
  
         //选中色
@@ -219,8 +220,15 @@ layui.define('view', function(exports){
         ,'.layui-nav-tree .layui-nav-child dd.layui-this a'
         ,'{background-color:{{d.color.selected}} !important;}'
         
-        //logo
-        ,'.layui-layout-admin .layui-logo{background-color:{{d.color.logo || d.color.main}} !important;}'
+          //logo
+          , '.layui-layout-admin .layui-logo{background-color:{{d.color.logo || d.color.main}} !important;}'
+
+          //font
+          , '.layui-layout-admin .layui-logo, .layui-layout-admin .layui-logo a {color:{{d.color.font }} !important;}'
+          , '.layui-layout-admin .layui-side-menu .layui-nav .layui-nav-item > a {color:{{d.color.font }} !important;}'
+          , '.layui-nav-child dd > a {color:{{d.color.font }} !important;}'
+          , '.layui-nav .layui-nav-more {border-top-color: {{d.color.font }};}'
+          , '.layui-nav .layui-nav-mored, .layui-nav-itemed>a .layui-nav-more {border-color: transparent transparent {{d.color.font }};}'
         
         //头部色
         ,'{{# if(d.color.header){ }}'
@@ -436,7 +444,7 @@ layui.define('view', function(exports){
         ,resize: false
         ,success: function(layero, index){
           var textarea = layero.find('textarea')
-          ,value = note === undefined ? '便签中的内容会存储在本地，这样即便你关掉了浏览器，在下次打开时，依然会读取到上一次的记录。是个非常小巧实用的本地备忘录' : note;
+          ,value = note === undefined ? '便签基于本地浏览器,你可以记录一些系统相关的信息,即便你关掉了浏览器，在下次打开时，依然会读取到上一次的记录。' : note;
           
           textarea.val(value).focus().on('keyup', function(){
             layui.data(setter.tableName, {

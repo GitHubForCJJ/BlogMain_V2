@@ -1,5 +1,5 @@
 {
-  "Code": 0,
+  "code": 0,
   "msg": "",
   "title": "JSON请求的相册",
   "id": 8,

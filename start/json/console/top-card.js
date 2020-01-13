@@ -1,11 +1,11 @@
 {
-  "Code": 0
+  "code": 0
   ,"msg": ""
   ,"count": "100"
   ,"data": [{
     "id": 111
     ,"title": "社区开始接受 “赞助商广告” 投放"
-    ,"username": "东走西走"
+    ,"username": "贤心"
     ,"channel": "公告"
     ,"href": "http://fly.layui.com/jie/15697/"
     ,"crt": 61632

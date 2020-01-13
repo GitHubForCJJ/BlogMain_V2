@@ -46,7 +46,7 @@ body,
 .layadmin-user-login-main {
   position: relative;
   height: calc(100% - 120px);
-  /* background: url(../style/res/login/img_bg_denglu.png) no-repeat center center; */
+  background: url(../style/res/login/img_bg_denglu.png) no-repeat center center;
   background-size: cover;
 }
 

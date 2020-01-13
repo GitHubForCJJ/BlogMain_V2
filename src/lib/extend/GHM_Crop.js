@@ -69,7 +69,11 @@ layui.define(['jquery', 'cropper', 'ext', 'GHM_upload', 'layer'], function (expo
     aspectRatio: 16 / 9,
     preview: '.img-preview'
   };
-
+  /* width: 750,
+  height: 422,
+  fillColor: '#fff',
+  imageSmoothingEnabled: false,
+  imageSmoothingQuality: 'high' */
   /**
    * 自动裁剪并上传七牛云(单个)
    * @param file object 文件的Blob对象
@@ -130,11 +134,19 @@ layui.define(['jquery', 'cropper', 'ext', 'GHM_upload', 'layer'], function (expo
    * @param $input Element input[type="file"]的原生对象(可多选的)
    * @param cropperOpt json|null 裁剪选项 同cropper.autoOne()的cropperOpt参数
    * @param uploadOpt json|null 上传的选项 同同cropper.autoOne()的uploadOpt参数
+   * @param canvasOpt json|null canvas选项，canvas大小或者填充背景色等
    * @return Promise array 上传的urL
    */
 
-  cropper.drag = function (el, cropperOpt, uploadOpt) {
+  cropper.drag = function (el, cropperOpt, canvasOpt, uploadOpt) {
     var file = el.files[0];
+    canvasOpt = layui.ext(canvasOpt, {
+      width: 750,
+      height: 422,
+      fillColor: '#fff',
+      imageSmoothingEnabled: false,
+      imageSmoothingQuality: 'high'
+    });
     return new Promise(function (resolve, reject) {
       // 弹出弹出层，回显图片
       var index = layer.open({
@@ -166,7 +178,7 @@ layui.define(['jquery', 'cropper', 'ext', 'GHM_upload', 'layer'], function (expo
         yes: function () {
           var $box = $('.g-cropper');
           var $img = $box.find('.img');
-          var canvas = $img.cropper('getCroppedCanvas');
+          var canvas = $img.cropper('getCroppedCanvas', canvasOpt);
           var blob = base64ToBlob(canvas.toDataURL('image/jpeg'), 'image/jpeg');
           blob.name = file.name + '.jpg';
           resolve(layui.GHM_upload.blob(blob, uploadOpt));

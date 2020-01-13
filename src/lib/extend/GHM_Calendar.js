@@ -2,7 +2,7 @@
  * @Author: Tangfan 
  * @Date: 2019-10-08 14:39:32 
  * @Last Modified by: Tangfan
- * @Last Modified time: 2019-11-20 15:14:18
+ * @Last Modified time: 2019-12-05 15:00:40
  */
 'use strict';
 (function () {
@@ -124,14 +124,18 @@
       var specMsg = '';
       var stockMsg = stock ? '库存：' : '';
       var currentDate = '';
+      var priceColor = 'red';
       // if (obj[i].content) currentDate = _this.options.cYear + '-' + _this.options.cMonth + '-' + obj[i].content;
       if (obj[i].content) currentDate = obj[i].date;
       if (spec * 1 === 1) specMsg = '五：￥';
       else if (spec * 1 === 2) specMsg = '四：￥';
       else if (spec * 1 === 3) specMsg = '特：￥';
+      if (price) priceColor = '';
+      else specMsg = specMsg.replace('￥', '');
+
       htm += '<li class="day' + disableClass + '" data-date="' + currentDate + '" data-spec = "' + spec + '">' +
         '<span class="content">' + obj[i].content + '</span>' +
-        '<span class="label price">' + specMsg + price + '</span>' +
+        '<span class="label price ' + priceColor + '">' + specMsg + price + '</span>' +
         '<span class="label stock">' + stockMsg + stock + '</span>' +
         '</li>';
       this.$days.html(htm);
@@ -221,7 +225,6 @@
   };
   // 价格设置拖拽选中
   GHMCalendar.prototype.selectPrice = function (obj) {
-    var _this = this;
     this.$days.selectable({
       cancel: '.disable',
       filter: 'li',
@@ -241,26 +244,37 @@
             var Commission = $('input[name = Commission]').val();
             var htm = '';
 
+            formObj.StockOth = formObj.StockSum - formObj.StockDzxz;
             $specialLine.remove();
+            $tbody.find('tr').removeClass('layui-hide');
             if (formObj) {
               if (formObj.SpecialName1.length) specialArr.push({ name: formObj.SpecialName1, value: formObj.SpecialOverPrice1 });
               if (formObj.SpecialName2.length) specialArr.push({ name: formObj.SpecialName2, value: formObj.SpecialOverPrice2 });
-              console.log(formObj, specialArr);
+              // console.log(formObj, specialArr);
               // 表单回显
               $.each($inputs, function (index, item) {
+                // console.log('表单回显', item);
                 var name = $(item).attr('name');
                 if ((formObj[name] + '').length && name !== 'Commission') {
                   $(item).val(formObj[name]);
                 }
+                if ((formObj.ChildOverPrice <= 0)) {
+                  //儿童结算价
+                  $tbody.find('.tr-child').addClass('layui-hide');
+                }
+                if ((formObj.BabyOverPrice <= 0)) {
+                  //婴儿童结算价
+                  $tbody.find('.tr-baby').addClass('layui-hide');
+                }
               });
               $.each(specialArr, function (index, item) {
-                var SpecialOverPrice = formObj['SpecialOverPrice' + (index + 1)] ? formObj['SpecialOverPrice' + (index + 1)] : '';
-                var SpecialSellPrice = formObj['SpecialSellPrice' + (index + 1)] ? formObj['SpecialSellPrice' + (index + 1)] : '';
-                var SpecialDisPrice = formObj['SpecialDisPrice' + (index + 1)] ? formObj['SpecialDisPrice' + (index + 1)] : '';
-                var SpecialTeamPrice = formObj['SpecialTeamPrice' + (index + 1)] ? formObj['SpecialTeamPrice' + (index + 1)] : '';
-                var SpecialStaffPrice = formObj['SpecialStaffPrice' + (index + 1)] ? formObj['SpecialStaffPrice' + (index + 1)] : '';
-                var SpecialChargePrice = formObj['SpecialChargePrice' + (index + 1)] ? formObj['SpecialChargePrice' + (index + 1)] : '';
-                var SpecialProfitPrice = formObj['SpecialProfitPrice' + (index + 1)] ? formObj['SpecialProfitPrice' + (index + 1)] : '';
+                var SpecialOverPrice = formObj['SpecialOverPrice' + (index + 1)];
+                var SpecialSellPrice = formObj['SpecialSellPrice' + (index + 1)];
+                var SpecialDisPrice = formObj['SpecialDisPrice' + (index + 1)];
+                var SpecialTeamPrice = formObj['SpecialTeamPrice' + (index + 1)];
+                var SpecialStaffPrice = formObj['SpecialStaffPrice' + (index + 1)];
+                var SpecialChargePrice = formObj['SpecialChargePrice' + (index + 1)];
+                var SpecialProfitPrice = formObj['SpecialProfitPrice' + (index + 1)];
 
                 htm += '<tr class="special-line">' +
                   '<input type="hidden" name="SpecialName' + (index + 1) + '" value="' + formObj['SpecialName' + (index + 1)] + '">' +
@@ -294,7 +308,7 @@
       $.each(arr, function (index, item) {
         _this.selectedObj[item.date] = item;
       });
-      console.log(_this.selectedObj);
+      // console.log(_this.selectedObj);
       // 重新渲染日历
       this.render();
     } else {
@@ -315,6 +329,7 @@
     }
   };
   GHMCalendar.prototype.loadDate = function (arr) {
+    // console.log(arr);
     //日历设置
     var _this = this;
     $.each(arr, function (index, item) {

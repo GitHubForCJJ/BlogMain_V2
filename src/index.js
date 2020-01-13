@@ -1,7 +1,7 @@
 /**
 
  @Name：layuiAdmin 主入口
- @Author：Rodman
+ @Author：东走西走
  @Site：http://www.layui.com/admin/
  @License：LPPL
     
@@ -18,6 +18,7 @@ layui.extend({
   , core: '../lib/extend/core'
   , token: '../lib/extend/token'
   , GHM_config: '../config/GHM_config'
+  , GHM_domain_config: '../config/GHM_domain_config'
 }).define(['setter', 'admin'], function (exports) {
   var setter = layui.setter
     , element = layui.element
@@ -30,7 +31,6 @@ layui.extend({
       var router = layui.router()
         , path = router.path
         , pathURL = admin.correctRouter(router.path.join('/'))
-
 
       //默认读取主页
       if (!path.length) path = [''];

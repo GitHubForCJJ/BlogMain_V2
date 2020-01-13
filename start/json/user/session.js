@@ -1,8 +1,8 @@
 {
-  "Code": 0
+  "code": 0
   ,"msg": ""
   ,"data": {
-    "username": "东走西走"
+    "username": "贤心"
     ,"sex": "男"
     ,"role": 1
   }

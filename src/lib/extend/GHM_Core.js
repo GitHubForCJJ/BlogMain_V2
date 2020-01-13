@@ -42,7 +42,7 @@ GHM_Core.isEmpty = function (obj) {
  * url(string):当前页url:按钮权限url('roleManage/index:add')
  */
 GHM_Core.btnRole = function (url) {
-  var list = JSON.parse(localStorage.getItem('GoAdmin')).UserMenu.UserMenuByLevel;
+  var list = JSON.parse(localStorage.getItem('BlogAdmin')).UserMenu.UserMenuByLevel;
   var rtn = {};
   list.forEach(function (l1) {
     if (!l1.subMenuLst || !l1.subMenuLst.length) return;
@@ -101,18 +101,18 @@ GHM_Core.checkNum = function (obj) {
  * 获取Kid
  */
 GHM_Core.getKid = function () {
-  return JSON.parse(localStorage.getItem('GoAdmin')).Model.KID
+  return JSON.parse(localStorage.getItem('BlogAdmin')).Model.KID
 
 }
 /**
  * 是否为管理员
  */
 GHM_Core.getIsAdmin = function () {
-  return JSON.parse(localStorage.getItem('GoAdmin')).Model.IsAdmin
+  return JSON.parse(localStorage.getItem('BlogAdmin')).Model.IsAdmin
 }
 
 GHM_Core.CompanyType = function () {
-  return JSON.parse(localStorage.getItem('GoAdmin')).Model.CompanyType
+  return JSON.parse(localStorage.getItem('BlogAdmin')).Model.CompanyType
 }
 
 /* 只允许输入数字
@@ -122,8 +122,12 @@ GHM_Core.onlyNum = function (obj) {
   obj.value = obj.value.replace(/[^\d]/g, "");
 };
 
-//校验身份证
-GHM_Core.checkIDCard = function (code) {
+/**
+ * 校验身份证
+ * @param {String} code，要校验的身份证号
+ * @param {Boolean} isObj，是否输出对象
+ */
+GHM_Core.checkIDCard = function (code, isObj) {
   var ret = new Object();
   ret.msg = "";
   ret.issuccess = true;
@@ -210,6 +214,7 @@ GHM_Core.checkIDCard = function (code) {
       ret.sex = 0;
     }
   }
+  if (isObj) return ret;
   return ret.issuccess;
 }
 /**
@@ -344,7 +349,6 @@ GHM_Core.fullPopup = function (tit, url, data, fn) {
     title: tit,
     area: [width + 'px', height + 'px'],
     offset: ['50px', '220px'],
-    zIndex: 998,
     success: function (layero, index) {
       //传入当前行的数据
       layui.view(this.id).render(url, data).done(fn);

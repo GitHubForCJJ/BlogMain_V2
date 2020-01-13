@@ -1,0 +1,65 @@
+/* 支付成功页面 */
+html {
+  background: #fff;
+}
+
+.layadmin-pay-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layadmin-pay-wrapper .box {
+  margin: 150px auto;
+  /* width: 300px; */
+  text-align: center;
+}
+
+.layadmin-pay-wrapper .box .img {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.layadmin-pay-wrapper .box .img img {
+  width: 100%;
+  height: 100%;
+}
+
+.layadmin-pay-wrapper .box .msg {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 40px auto;
+}
+
+.layadmin-pay-wrapper .box .msg em {
+  color: #FF9900;
+  font-style: normal;
+}
+
+.layadmin-pay-wrapper .box .order {
+  color: #313131;
+}
+
+.layadmin-pay-wrapper .box .btn-area {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.layadmin-pay-wrapper .box .btn-area .layui-btn {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 30px;
+  font-size: 16px;
+}
+
+.layadmin-pay-wrapper .box .btn-area .layui-btn-primary {
+  background: #ccc;
+}
+
+.layadmin-pay-wrapper .box .btn-area .layui-btn-primary:hover {
+  border-color: transparent;
+}

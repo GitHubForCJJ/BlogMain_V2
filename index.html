@@ -8,12 +8,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-
   <link rel="stylesheet" href="start/layui/css/layui.css" media="all">
   <!-- 公共css -->
   <link rel="stylesheet" href="src/style/GHM_common.css">
-
-
+  <!-- zTree -->
+  <link rel="stylesheet" href="src/style/res/zTree/css/zTreeStyle/zTreeStyle.css">
+  <!-- cropper -->
+  <link rel="stylesheet" href="src/lib/extend/cropper/cropper.css">
+  <!-- formSelects -->
+  <link rel="stylesheet" href="src/lib/extend/formselect/formSelects-v4.css">
+  <link rel="stylesheet" href="src/style/res/ueditor/themes/default/css/ueditor.min.css">
+  <!-- jquery-ui-selectable -->
+  <!-- <link rel="stylesheet" href="src/style/res/jquery-ui/jquery-ui.min.css"> -->
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+  <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
   <script>
     /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
   </script>
@@ -22,23 +33,33 @@
 <body>
   <div id="LAY_app"></div>
   <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="src/lib/extend/jquery.qrcode.min.js"></script>
   <script src="start/layui/layui.js"></script>
   <!-- 七牛云 -->
   <script src="https://unpkg.com/qiniu-js@2.5.4/dist/qiniu.min.js"></script>
-  <!-- API -->
-  <script src="src/config/GHM_config.js"></script>
+  <!-- 获取用户IP(搜狐接口) -->
+  <!-- <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script> -->
+  <!--promise兼容ie-->
+  <script src="src/lib/extend/promise.js"></script>
+  <!--crypto库-->
   <script src="src/lib/extend/crypto-js.min.js"></script>
+  <script src="src/lib/extend/tripledes.js"></script>
   <!-- 核心库 -->
   <script src="src/lib/extend/GHM_Core.js"></script>
+  <!-- API -->
+  <script src="src/config/GHM_config.js"></script>
   <!-- ueditor -->
   <script src="src/style/res/ueditor/ueditor.config.js"></script>
   <script src="src/style/res/ueditor/ueditor.all.js"></script>
   <script src="src/style/res/ueditor/lang/zh-cn/zh-cn.js"></script>
+  <!-- jquery-ui-selectable -->
+  <!-- <script src="dist/lib/extend/jquery-ui/jquery-ui.min.js"></script> -->
+  <!-- <script src="src/style/res/jquery-ui/jquery-ui.min.js"></script> -->
+  <!-- GHM_Calendar -->
+  <script src="src/lib/extend/GHM_Calendar.js"></script>
+  <!-- 文字拷贝库 -->
+  <script src="src/lib/extend/clipboard.min.js"></script>
   <script>
-    // layui.config({
-    //   base: 'src/' //指定 layuiAdmin 项目路径，本地开发用 src，线上用 dist
-    //   , version: '1.2.1'
-    // }).use('index');
     layui.config({
       base: 'src/' //指定 layuiAdmin 项目路径，本地开发用 src，线上用 dist
       , version: Math.round(new Date() / 1000)

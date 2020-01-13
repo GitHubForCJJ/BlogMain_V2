@@ -1,9 +1,9 @@
 {
-  "Code": 0
+  "code": 0
   ,"msg": ""
   ,"count": "100"
   ,"data": [{
-    "keywords": "东走西走是男是女"
+    "keywords": "贤心是男是女"
     ,"frequency": 8520
     ,"userNums": 2216
   },{

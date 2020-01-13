@@ -3,12 +3,12 @@ layui.define(['jquery', 'ext', 'md5'], function (exports) {
     md5 = layui.md5,
     token, expire;
 
-  var GHM_QINIU_API = 'http://cdn1.lieweiyou.com/';//七牛云上传地址
-  /* cdn1.lieweiyou.com
-  cdn2.lieweiyou.com
-  cdn3.lieweiyou.com
-  cdn4.lieweiyou.com
-  cdn5.lieweiyou.com */
+  var GHM_QINIU_API = 'http://cdn1.lieweiyou.cn/';//七牛云上传地址
+  /* cdn1.lieweiyou.cn
+  cdn2.lieweiyou.cn
+  cdn3.lieweiyou.cn
+  cdn4.lieweiyou.cn
+  cdn5.lieweiyou.cn */
 
   function getRndInteger (min, max) {//获取1-5的随机数
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -62,7 +62,7 @@ layui.define(['jquery', 'ext', 'md5'], function (exports) {
    * @param opt json|null 同update()的参数opt
    */
   upload.blob = function (blob, opt) {
-    GHM_QINIU_API = 'http://cdn' + getRndInteger(1, 5) + '.lieweiyou.com/';
+    GHM_QINIU_API = 'http://cdn' + getRndInteger(1, 5) + '.lieweiyou.cn/';
     console.log(GHM_QINIU_API);
     return getToken().then(function (token) {
       opt = layui.ext(opt, {

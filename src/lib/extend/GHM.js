@@ -2,10 +2,8 @@
 layui.define(['ext', 'token', 'md5', 'des', 'jquery', 'setter', 'layer'], function (exports) {
   var setter = layui.setter;
   var GHM = {};
-
   GHM.post = function (url, data) {
     var resEncrypt = layui.data(setter.tableName).dataIsEncrypt;
-    console.log("resencrypt" + resEncrypt);
     var secret = layui.token(true);
     var data = layui.ext(data, layui.GHM.data);
     var time = data.Timestamp = Math.round(new Date() / 1000); // 时分秒
