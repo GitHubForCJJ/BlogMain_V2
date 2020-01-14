@@ -101,18 +101,18 @@ GHM_Core.checkNum = function (obj) {
  * 获取Kid
  */
 GHM_Core.getKid = function () {
-  return JSON.parse(localStorage.getItem('BlogAdmin')).Model.KID
+  return JSON.parse(localStorage.getItem('GoAdmin')).Model.KID
 
 }
 /**
  * 是否为管理员
  */
 GHM_Core.getIsAdmin = function () {
-  return JSON.parse(localStorage.getItem('BlogAdmin')).Model.IsAdmin
+  return JSON.parse(localStorage.getItem('GoAdmin')).Model.IsAdmin
 }
 
 GHM_Core.CompanyType = function () {
-  return JSON.parse(localStorage.getItem('BlogAdmin')).Model.CompanyType
+  return JSON.parse(localStorage.getItem('GoAdmin')).Model.CompanyType
 }
 
 /* 只允许输入数字
@@ -349,6 +349,7 @@ GHM_Core.fullPopup = function (tit, url, data, fn) {
     title: tit,
     area: [width + 'px', height + 'px'],
     offset: ['50px', '220px'],
+    zIndex: 999,
     success: function (layero, index) {
       //传入当前行的数据
       layui.view(this.id).render(url, data).done(fn);

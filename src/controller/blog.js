@@ -219,7 +219,8 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                     laydate.render({
                         elem: this,
                         type: 'datetime',
-                        format: 'yyyy-MM-dd HH:mm:ss'
+                        format: 'yyyy-MM-dd HH:mm:ss',
+                        zIndex: 999
                     })
                 });
                 form.render();
