@@ -101,18 +101,18 @@ GHM_Core.checkNum = function (obj) {
  * 获取Kid
  */
 GHM_Core.getKid = function () {
-  return JSON.parse(localStorage.getItem('GoAdmin')).Model.KID
+  return JSON.parse(localStorage.getItem('BlogAdmin')).Model.KID
 
 }
 /**
  * 是否为管理员
  */
 GHM_Core.getIsAdmin = function () {
-  return JSON.parse(localStorage.getItem('GoAdmin')).Model.IsAdmin
+  return JSON.parse(localStorage.getItem('BlogAdmin')).Model.IsAdmin
 }
 
 GHM_Core.CompanyType = function () {
-  return JSON.parse(localStorage.getItem('GoAdmin')).Model.CompanyType
+  return JSON.parse(localStorage.getItem('BlogAdmin')).Model.CompanyType
 }
 
 /* 只允许输入数字
