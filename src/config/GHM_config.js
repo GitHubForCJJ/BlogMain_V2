@@ -37,7 +37,7 @@ GHM_config.url = {
     GetItemBlog: GHM_BASE_API + '/AdminBlog/GetItemBlog', //获取博客item
     AddItemBlog: GHM_BASE_API + '/AdminBlog/AddItemBlog', //添加博客item
     UpdateItemBlog: GHM_BASE_API + '/AdminBlog/UpdateItemBlog', //添加博客item
-
+    StartOrStop: GHM_BASE_API + '/AdminBlog/StartOrStop', //启用禁用博客item
     GetListCartgory: GHM_BASE_API + '/Category/GetListCartgory', //获取博客类型
 
 }

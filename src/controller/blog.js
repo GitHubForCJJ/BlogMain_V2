@@ -460,45 +460,31 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
     }
 
     //监听状态切换
-    form.on('switch(startstop2)', function (data) {
+    form.on('switch(startstop)', function (data) {
+
         var loadidx = layer.msg("状态修改中...", {
             icon: 16,
             shade: [0.5, '#000'],
             time: false //取消自动关闭
         });
-
+        var num = $(this).attr('blogNum');
         var state = 1;
         var msg = "禁用成功";
         if (data.elem.checked) {
             state = 0;
             msg = "启用成功";
         }
-
         var field = {};
-        field.update = {
-            States: state
-        };
-        field.kid = data.value;
-
-        GHM.post(GHM_config.url.UpdateItemAdvert, {
+        field.update = {};
+        field.update.States = state;
+        field.Num = num;
+        GHM.post(GHM_config.url.StartOrStop, {
             Data: JSON.stringify(field)
         }).then(function (res) {
-            layer.close(loadidx);
-            if (res.Code == 0) {
-                layer.msg(msg);
-                var btnrefresh = window.parent.document.getElementsByClassName('layui-laypage-btn')[0];
-                if (btnrefresh == null) {
-                    layui.table.reload('LAY-Advert-manage');
-                } else {
-                    btnrefresh.click();
-                }
-            } else {
-                if (res.Msg == "") {
-                    layer.msg("执行失败,服务器未返回原因");
-                } else {
-                    layer.msg(res.Msg);
-                }
-            }
+            console.log(res)
+            layer.closeAll();
+            layer.msg("启用禁用成功")
+            GHM_Core.reloadTable('LAY-Blog-manage');
         }).catch(function (error) {
             //layer.closeAll();
             var msg = '';
@@ -506,6 +492,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
             else msg = '执行失败，服务器未返回失败信息';
             layer.msg(msg);
         });
+
     });
 
     //点击查看大图

@@ -55,10 +55,10 @@
 
     <script type="text/html" id="temp_Blog_States">
         {{#  if(d.States ==  0 ){ }}
-        <input type="checkbox" lay-filter="startstop2" value={{d.KID}} lay-skin="switch" lay-text="启用|禁用" checked>
+        <input type="checkbox" lay-filter="startstop" blogNum={{d.BlogNum}}  value={{d.KID}} lay-skin="switch" lay-text="启用|禁用" checked>
 
         {{#  } else if(d.States ==  1) { }}
-        <input type="checkbox" lay-filter="startstop2" value={{d.KID}} lay-skin="switch" lay-text="启用|禁用">
+        <input type="checkbox" lay-filter="startstop" blogNum={{d.BlogNum}} value={{d.KID}} lay-skin="switch" lay-text="启用|禁用">
         {{#  } }}
     </script>
     <script type="text/html" id="table-Blog-operation">
