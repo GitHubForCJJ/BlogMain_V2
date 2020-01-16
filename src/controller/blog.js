@@ -86,15 +86,17 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                 align: 'center'
             }, {
                 field: 'Title',
-                width: 300,
+                width: 450,
                 title: '标题',
                 align: 'center'
-            }, {
-                field: 'Blogimg',
-                width: 120,
-                title: '博客图片',
-                templet: '#table-Blog-blogimg'
-            }, {
+            }
+                // , {
+                //     field: 'Blogimg',
+                //     width: 120,
+                //     title: '博客图片',
+                //     templet: '#table-Blog-blogimg'
+                // }
+                , {
                 field: 'CreateTime',
                 width: 200,
                 title: '创建时间',
