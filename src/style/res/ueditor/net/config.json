@@ -15,7 +15,7 @@
     /* 图片压缩最长边限制 */
     "imageInsertAlign": "none",
     /* 插入的图片浮动方式 */
-    "imageUrlPrefix": "http://q2c25d53h.bkt.clouddn.com/",
+    "imageUrlPrefix": "http://qiniu.chenjianjun.info/",
     /* 图片访问路径前缀 */
     "imagePathFormat": "upload/image/{yyyy}{mm}{dd}/{time}{rand:6}",
     /* 上传保存路径,可以自定义保存路径和文件名格式 */
@@ -114,7 +114,7 @@
     /* 指定要列出图片的目录 */
     "imageManagerListSize": 20,
     /* 每次列出文件数量 */
-    "imageManagerUrlPrefix": "http://image.cjj81.cn/",
+    "imageManagerUrlPrefix": "http://qiniu.chenjianjun.info",
     /* 图片访问路径前缀 */
     "imageManagerInsertAlign": "none",
     /* 插入的图片浮动方式 */
