@@ -19,7 +19,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
     var myUeditor = "";
 
 
-    var checkdata = function (data) {
+    function checkdata (data) {
         //return true;
         if (data.Type.length == 0) {
             layer.msg('请选择博客类型！');
@@ -190,7 +190,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
     });
 
     //添加博客类型
-    var addCategory = function () {
+    function addCategory () {
         GHM.post(GHM_config.url.GetListCartgory, {
             Data: {}
         }).then(function (res) {
