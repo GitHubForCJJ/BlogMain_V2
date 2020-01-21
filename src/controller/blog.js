@@ -313,7 +313,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
     //监听工具条
     table.on('tool(LAY-Blog-manage)', function (obj) {
         var data = obj.data;
-        var kid = data.KID;
+        var blogNum = data.BlogNum;
         if (obj.event == 'edit') {
             GHM_Core.fullPopup('编辑博客信息', 'blog/addOrEdit', data, function () {
                 addCategory();
@@ -384,9 +384,8 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                 });
                 //获取提交的字段
                 var field = {};
-                field.update = data.field;
-                field.kid = kid;
-                GHM.post(GHM_config.url.DeleteAdvert, {
+                field.num = blogNum;
+                GHM.post(GHM_config.url.DeleteItemBlog, {
                     Data: JSON.stringify(field)
                 }).then(function (res) {
                     layer.close(index); //执行关闭
@@ -406,6 +405,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                         }
                     }
                 }).catch(function (error) {
+                    console.log(error)
                     var msg = '';
                     if (error.msg) msg = error.msg;
                     else msg = '执行失败，服务器未返回失败信息';

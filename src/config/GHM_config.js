@@ -12,9 +12,9 @@ if (hostname == 'localhost' || hostname.indexOf('192.168.20') != -1) {
     // 本地环境
     GHM_BASE_API = 'http://cjjapi.blog.com/api';
     //GHM_BASE_API = 'http://192.168.20.35:9953/api';
-} else if (hostname == 'cjjmain.blog.com') {
+} else if (hostname.indexOf('chenjianjun') > -1) {
     // 内网环境
-    GHM_BASE_API = 'http://cjjapi.blog.com/api';
+    GHM_BASE_API = 'https://blogapi.chenjianjun.info/api';
     GHM_PT_Domain = '.dzxz.com';
 }
 GHM_config.reqBase = {
@@ -37,6 +37,7 @@ GHM_config.url = {
     GetItemBlog: GHM_BASE_API + '/AdminBlog/GetItemBlog', //获取博客item
     AddItemBlog: GHM_BASE_API + '/AdminBlog/AddItemBlog', //添加博客item
     UpdateItemBlog: GHM_BASE_API + '/AdminBlog/UpdateItemBlog', //添加博客item
+    DeleteItemBlog: GHM_BASE_API + '/AdminBlog/DeleteItemBlog', //添加博客item
     StartOrStop: GHM_BASE_API + '/AdminBlog/StartOrStop', //启用禁用博客item
     GetListCartgory: GHM_BASE_API + '/Category/GetListCartgory', //获取博客类型
 
