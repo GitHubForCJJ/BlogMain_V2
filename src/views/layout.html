@@ -7,19 +7,39 @@
                     <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
                 </a>
             </li>
+            <!--<li class="layui-nav-item layui-this layui-hide-xs layui-hide-sm layui-show-md-inline-block">
+        <a lay-href="" title="">
+          控制台
+        </a>
+      </li>-->
+            <!-- <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <a lay-href="/" target="_blank" title="首页">
+                    <i class="layui-icon layui-icon-website"></i>
+                </a>
+            </li> -->
             <li class="layui-nav-item" lay-unselect>
                 <a href="javascript:;" layadmin-event="refresh" title="刷新">
                     <i class="layui-icon layui-icon-refresh-3"></i>
                 </a>
             </li>
+            <!-- <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <input type="text" placeholder="搜索订单..." autocomplete="off" class="layui-input layui-input-search"
+                    layadmin-event="serach" lay-action="creOrder/?orderid=">
+            </li> -->
         </ul>
         <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
 
-            <!--  <li class="layui-nav-item" lay-unselect>
+            <li class="layui-nav-item" lay-unselect>
                 <a lay-href="sysMsg/" layadmin-event="message">
                     <i class="layui-icon layui-icon-notice"></i>
+                    <!-- 如果有新消息，则显示小圆点 -->
+                    <!-- <script type="text/html" template>
+                        {{# if(d.data.newmsg){ }}
+                        <span class="layui-badge-dot"></span>
+                        {{# } }}
+                    </script> -->
                 </a>
-            </li> -->
+            </li>
             <li class="layui-nav-item layui-hide-xs" lay-unselect>
                 <a href="javascript:;" layadmin-event="theme">
                     <i class="layui-icon layui-icon-theme"></i>
@@ -63,7 +83,7 @@
         <div class="layui-side layui-side-menu">
             <div class="layui-side-scroll">
                 <div class="layui-logo" lay-href="">
-                    <span>{{ layui.setter.name || 'layuiAdmin' }}</span>
+                    <span>{{ layui.setter.name || 'BlogAdmin' }}</span>
                 </div>
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
                     lay-filter="layadmin-system-side-menu">
@@ -117,9 +137,14 @@
                     {{# }); }}
                 </ul>
                 <div class="user_info">
-                    {{ layui.data('BlogAdmin').Model.UserName }}
+                    {{ layui.data('BlogAdmin').Model.UserNickName }}
                     <ul class="list">
                         <li class="user">{{ layui.data('BlogAdmin').Model.UserAccount }}</li>
+                        {{# if(layui.data('BlogAdmin').Model.CompanyId !== 1){ }}
+                        <li>
+                            <a href="javascript:" id="linkPT">联盟圈后台</a>
+                        </li>
+                        {{# } }}
                         <li lay-href="user/resetPwd">修改密码</li>
                         <li layadmin-event="logout">退出</li>
                     </ul>

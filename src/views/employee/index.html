@@ -1,0 +1,82 @@
+<div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-employee-search">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="KID" class="layui-form-label">员工姓名</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入" id="UserName" name="UserName|l" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="KID" class="layui-form-label">账号</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入" id="UserAccount" name="UserAccount|l" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">添加时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="CreateTime|be" id="CreateTime_Start"
+                    placeholder="请选择" class="layui-input" readonly>
+                </div>
+                <div class="layui-form-mid">
+                    -
+                </div>
+                <div class="layui-input-inline">
+                    <input type="text" name="CreateTime|se" id="CreateTime_End" placeholder="请选择" class="layui-input" readonly>
+                </div>
+            </div>
+            <br>
+            <div class="layui_btn_area">
+                <button class="layui-btn layui-btn-danger layui-admin-employee" lay-submit
+                    lay-filter="LAY-employee-search">查询</button>
+                <script type='text/html' template>
+                                    {{# if(GHM_Core.btnRole('employee/index:add')){ }}
+                                    <button class="layui-btn layui-btn-success layui-admin-employee" style="background-color: #FF9900" data-type="add">添加员工</button>
+                                    {{# } }}
+                                </script>
+            </div>
+        </div>
+    </div>
+    <table class="layui-table" lay-filter="LAY-employee-manage" id="LAY-employee-manage"></table>
+    <script type="text/html" id="employee_States">
+                    {{#  if(d.States == 0){ }}
+                    <span class="layui-badge layui-bg-blue">启用</span>
+                    {{#  } else { }}
+                    <span class="layui-badge layui-bg-red ">禁用</span>
+                    {{#  } }}
+                </script>
+    <script type="text/html" id="table-employee-operation">
+                    {{# if(GHM_Core.btnRole('employee/index:resetPassword')){ }}
+                    <a class="table_operate"  lay-event="ResetPassword" >【重置密码】</a>
+                    {{# } }}
+                    {{# if(GHM_Core.btnRole('employee/index:edit')){ }}
+                    <a class="table_operate " lay-event="Edit">【编辑】</a>
+                    {{# } }}
+                    {{# if(GHM_Core.btnRole('employee/index:upperFrame')){ }}
+                    <a class="table_operate " lay-event="UpperFrame">{{d.States == 0? "【禁用】":"【启用】"}}</a>
+                    {{# } }}
+                    {{# if(GHM_Core.btnRole('employee/index:del')){ }}
+                    <a class="table_operate " lay-event="Delete">【删除】</a>
+                    {{# } }}
+                    {{# if(GHM_Core.btnRole('employee/index:set')){ }}
+                            {{# if((JSON.parse(localStorage.getItem('GoAdmin')).Model.CompanyId !=1 && d.CompanyId !=1)|| GHM_Core.getKid()!=d.KID){ }}
+                                <a class="table_operate " lay-event="set" >【授权】</a>
+                            {{# } }}
+                    {{# } }}
+                    <!--{{# if(GHM_Core.btnRole('employee/index:set') && GHM_Core.getKid()!=d.KID && JSON.parse(localStorage.getItem('GoAdmin')).Model.CompanyId ==1){ }}
+                    <a class="table_operate " lay-event="set" >【授权】</a>
+                    {{# } }}-->
+            </script>
+        </div>
+<script>
+    layui.use(['employee'], layui.factory('employee')).use(['admin', 'employee', 'table'], function () {
+        var $ = layui.$
+            , admin = layui.admin
+            , view = layui.view
+            , table = layui.table
+            , form = layui.form
+            , GHM = layui.GHM;
+        form.render(null, 'LAY-employee-search');
+    });
+</script>

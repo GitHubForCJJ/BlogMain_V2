@@ -1,0 +1,62 @@
+<title>授权</title>
+<div class="admin_popup_box">
+  <div class="scroll_content">
+      <ul id="LAY-RoleManage-Tree" class="ztree"></ul>
+  </div>
+  <div class="btn_area">
+    <!-- 关闭最新弹出的层 -->
+    <a href="javascript:" class="layui-btn layui-btn-cancel" onclick="layer.close(layer.index)">取消</a>
+    <a href="javascript:" class="layui-btn" id="LAY-RoleManage-setRole-submit">确定</a>
+  </div>
+  <script type="text/html" template>
+    <input type="hidden" id="checkedList" value="{{ d.params.MenuLst ? d.params.MenuLst : ''}}">
+  </script>
+</div>
+<script>
+  layui.use(['zTree', 'jquery', 'GHM', 'form', 'setter'], function () {
+    var zTree = layui.zTree,
+      $ = layui.jquery,
+      GHM = layui.GHM;
+
+    var zTreeObj;
+    var $setRole = $('#LAY-RoleManage-setRole-submit');
+    var setting = {
+      data: {
+        key: {
+          name: 'MenuName'
+        },
+        simpleData: {
+          enable: true,
+          idKey: 'KID',
+          pIdKey: 'FatherID'
+        }
+      },
+      check: {
+        enable: true
+      }
+    };
+    var zNodes = [];
+
+    // zTree init
+    function initTree(data) {
+      zNodes = data;
+      zTreeObj = zTree.init($('#LAY-RoleManage-Tree'), setting, zNodes);
+    }
+
+    // 菜单列表
+    GHM.post(GHM_config.url.GetAllMenuDataList).then(function (res) {
+      var menuList = res.Data;
+      var checkedList = $('#checkedList').val().split(',');
+      for (var i in menuList) {
+        menuList[i].open = true;
+        if (checkedList.length !== 0) {
+          for (var j in checkedList) {
+            if (checkedList[j] == menuList[i].KID) menuList[i].checked = true;
+          }
+        }
+      }
+      initTree(menuList);
+    })
+  });
+
+</script>

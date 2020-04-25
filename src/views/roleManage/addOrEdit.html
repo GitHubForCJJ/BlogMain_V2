@@ -1,0 +1,30 @@
+<title>AddOrEdit</title>
+<div class="admin_popup_box">
+  <script type="text/html" template>
+    <div class="layui-form">
+      <div class="scroll_content">
+          {{# if(d.params.RoleName){ }}
+          <div class="layui-form-item">
+              <label class="layui-form-label">角色原名称</label>
+              <div class="layui-input-block">
+                <span class="show_data">{{ d.params.RoleName }}</span>
+              </div>
+          </div>
+          {{# } }}
+          <div class="layui-form-item">
+            <label for="RoleName" class="layui-form-label">角色新名称</label>
+            <div class="layui-input-block">
+              <input type="text" id="RoleName" name="RoleName" class="layui-input" lay-verify="required">
+            </div>
+          </div>
+      </div>
+      <div class="btn_area">
+        <!-- 关闭最新弹出的层 -->
+        <input type="hidden" name="KID" value="{{ d.params.KID ? d.params.KID : 0 }}">
+        <input type="hidden" name="BusinessType" value="1">
+        <a href="javascript:" class="layui-btn layui-btn-cancel" onclick="layer.closeAll()">取消</a>
+        <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-RoleManage-add-submit">确定</a>
+      </div>
+    </div>
+  </script>
+</div>

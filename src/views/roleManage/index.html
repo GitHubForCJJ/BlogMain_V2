@@ -1,0 +1,41 @@
+<title>角色管理</title>
+<div class="layui-card">
+  <div class="layui-card-header layuiadmin-card-header-auto">
+    <div class="layui-form">
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label for="RoleName" class="layui-form-label">角色名称</label>
+          <div class="layui-input-block">
+            <input type="text" placeholder="请输入角色名称" id="RoleName" name="RoleName|l" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-block layui_btn_area">
+          <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-RoleManage-search">查询</a>
+          <script type='text/html' template>
+            {{# if(GHM_Core.btnRole('roleManage/index:add')){ }}
+            <a href="javascript:" class="layui-btn layui-btn-another LAY-btn-RoleManage" data-type="add">添加角色</a>
+            {{# } }}
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layui-card-body">
+    <table class="layui-table" lay-filter="LAY_RoleManage_table" id="LAY_RoleManage_table"></table>
+    <!-- 操作 -->
+    <script type="text/html" id="table-roleManage-operation">
+      {{# if(GHM_Core.btnRole('roleManage/index:edit')){ }}
+      <a class="table_operate" lay-event="edit">【修改】</a>
+      {{# } }}
+      {{# if(GHM_Core.btnRole('roleManage/index:del')){ }}
+      <a class="table_operate" lay-event="del">【删除】</a>
+      {{# } }}
+      {{# if(GHM_Core.btnRole('roleManage/index:set')){ }}
+      <a class="table_operate" lay-event="role">【权限】</a>
+      {{# } }}
+    </script>
+  </div>
+</div>
+<script>
+  layui.use(['roleManage'], layui.factory('roleManage'))
+</script>
