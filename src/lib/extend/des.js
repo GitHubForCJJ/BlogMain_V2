@@ -1,19 +1,22 @@
 // des加密/解密
 layui.define(function (exports) {
     // des解密
-    function decryptByDESModeCBC(encrypted, key, iv) {
-        var key = CryptoJS.enc.Utf8.parse(key);
-        var iv = CryptoJS.enc.Utf8.parse(iv);
-        var decrypted = CryptoJS.DES.decrypt(encrypted, key,
+    function decryptByDESModeCBC (encrypted, key, iv) {
+        var hkey = CryptoJS.enc.Utf8.parse(key);
+        var hiv = CryptoJS.enc.Utf8.parse(iv);
+        var decrypted = CryptoJS.DES.decrypt(encrypted, hkey,
             {
-                iv: iv,
+                iv: hiv,
                 mode: CryptoJS.mode.CBC,
                 padding: CryptoJS.pad.Pkcs7
             });
+        console.log(encrypted)
+        console.log(decrypted.toString(CryptoJS.enc.Utf8))
+
         return decrypted.toString(CryptoJS.enc.Utf8);
     };
     // des加密
-    function encryptByDESModeCBC(encrypted, key, iv) {
+    function encryptByDESModeCBC (encrypted, key, iv) {
         var key = CryptoJS.enc.Utf8.parse(key);
         var iv = CryptoJS.enc.Utf8.parse(iv);
         var encrypted = CryptoJS.DES.encrypt(encrypted, key,

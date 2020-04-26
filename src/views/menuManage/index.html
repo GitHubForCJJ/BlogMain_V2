@@ -1,74 +1,75 @@
 <script type="text/html" template>
     <link rel="stylesheet" href="{{ layui.setter.base }}style/menuManage/index.css?v={{ layui.admin.v }}-1" media="all">
   </script>
-  <title>菜单管理</title>
-  <div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-      <div class="layui-col-md4">
-        <div class="layui-card">
-          <div class="layui-card-header">
-            <b>菜单列表</b>
-          </div>
-          <div class="layui-card-body">
-            <ul id="LAY-MenuMana-Tree" class="ztree"></ul>
-          </div>
+<title>菜单管理</title>
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md4">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          <b>菜单列表</b>
+        </div>
+        <div class="layui-card-body">
+          <ul id="LAY-MenuMana-Tree" class="ztree"></ul>
         </div>
       </div>
-      <div class="layui-col-md8">
-        <div class="layui-card">
-          <div class="layui-card-header"><b id="LAY-MenuMana-header">当前菜单</b></div>
-          <div class="layui-form" lay-filter="component-form-element" style="padding:20px;">
-            <input type="hidden" name="KID" value="">
-            <div class="layui-form-item">
-              <label class="layui-form-label">菜单名称:</label>
-              <div class="layui-input-block">
-                <input type="text" name="MenuName" lay-verify="required" placeholder="" autocomplete="off"
-                  class="layui-input">
-              </div>
+    </div>
+    <div class="layui-col-md8">
+      <div class="layui-card">
+        <div class="layui-card-header"><b id="LAY-MenuMana-header">当前菜单</b></div>
+        <div class="layui-form" lay-filter="component-form-element" style="padding:20px;">
+          <input type="hidden" name="KID" value="">
+          <div class="layui-form-item">
+            <label class="layui-form-label">菜单名称:</label>
+            <div class="layui-input-block">
+              <input type="text" name="Menuname" lay-verify="required" placeholder="" autocomplete="off"
+                class="layui-input">
             </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">图标:</label>
-              <div class="layui-input-block">
-                <input type="text" name="MenuIco" lay-verify="required" placeholder="" autocomplete="off"
-                  class="layui-input">
-              </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">图标:</label>
+            <div class="layui-input-block">
+              <input type="text" name="Menuicon" lay-verify="required" placeholder="" autocomplete="off"
+                class="layui-input">
             </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">Url地址:</label>
-              <div class="layui-input-block">
-                <input type="text" name="MenuUrl" lay-verify="required" placeholder="" autocomplete="off"
-                  class="layui-input">
-              </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">Url地址:</label>
+            <div class="layui-input-block">
+              <input type="text" name="MenuUrl" lay-verify="required" placeholder="" autocomplete="off"
+                class="layui-input">
             </div>
-  
-            <div class="layui-form-item">
-              <label class="layui-form-label">显示顺序:</label>
-              <div class="layui-input-block">
-                <input type="text" name="MenuSort" lay-verify="required" placeholder="" autocomplete="off"
-                  class="layui-input" onkeyup="GHM_Core.onlyNum(this)">
-                <br>
-                <span>值越大越靠前</span>
-              </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">显示顺序:</label>
+            <div class="layui-input-block">
+              <input type="text" name="Menusort" lay-verify="required" placeholder="" autocomplete="off"
+                class="layui-input" onkeyup="GHM_Core.onlyNum(this)">
+              <br>
+              <span>值越大越靠前</span>
             </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">描述信息:</label>
-              <div class="layui-input-block">
-                <textarea name="MenuMsg" placeholder="" class="layui-textarea"></textarea>
-              </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">描述信息:</label>
+            <div class="layui-input-block">
+              <textarea name="Menuremark" placeholder="" class="layui-textarea"></textarea>
             </div>
-            <div class="layui-form-item">
-              <div class="layui-input-block">
-                <input type="hidden" name="FatherID" id="LAY-MenuMana-FatherID">
-                <input type="hidden" id="LAY-MenuMana-operate">
-                <input type="hidden" name="BusinessType" value="1">
-                <button class="layui-btn layui-btn-disabled" id="LAY-MenuMana-save" lay-submit lay-filter="LAY-MenuMana-save" disabled>立即提交</button>
-              </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <input type="hidden" name="Fatherid" id="LAY-MenuMana-Fatherid">
+              <input type="hidden" id="LAY-MenuMana-operate">
+              <input type="hidden" name="BusinessType" value="1">
+              <button class="layui-btn layui-btn-disabled" id="LAY-MenuMana-save" lay-submit
+                lay-filter="LAY-MenuMana-save" disabled>立即提交</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script>
-    layui.use(['menuManage'], layui.factory('menuManage'))
-  </script>
+</div>
+<script>
+  layui.use(['menuManage'], layui.factory('menuManage'))
+</script>

@@ -33,6 +33,20 @@ GHM_config.url = {
     mobileLoginAPI: GHM_BASE_API + '/Comm/MobileLogin', //验证码登录
     GetQiNiuUploadToken: GHM_BASE_API + '/Comm/GetQiNiuUploadToken', //七牛云上传token
 
+    // 菜单管理
+    GetAllMenuDataList: GHM_BASE_API + '/Menu/GetAllMenuDataList',
+    UpdateItemMenu: GHM_BASE_API + '/Menu/UpdateItemMenu',
+    AddItemMenu: GHM_BASE_API + '/Menu/AddItemMenu',
+    DelItemMenuByKid: GHM_BASE_API + '/Menu/DelItemMenuByKid',
+
+    // 角色管理
+    GetListRole: GHM_BASE_API + '/Role/GetListRole',
+    UpdateItemRole: GHM_BASE_API + '/Role/UpdateItemRole',
+    AddItemRole: GHM_BASE_API + '/Role/AddItemRole',
+    DeleteItemRole: GHM_BASE_API + '/Role/DeleteItemRole',
+    GetItemRole: GHM_BASE_API + '/Role/GetItemRole',
+    GetSmallListRole: GHM_BASE_API + '/Role/GetSmallListRole',
+
     GetListBlog: GHM_BASE_API + '/AdminBlog/GetListBlog', //获取博客list
     GetItemBlog: GHM_BASE_API + '/AdminBlog/GetItemBlog', //获取博客item
     AddItemBlog: GHM_BASE_API + '/AdminBlog/AddItemBlog', //添加博客item
