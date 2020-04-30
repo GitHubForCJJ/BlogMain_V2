@@ -5,15 +5,18 @@ layui.define(['ext', 'token', 'md5', 'des', 'jquery', 'setter', 'layer'], functi
   GHM.post = function (url, data) {
     var resEncrypt = layui.data(setter.tableName).dataIsEncrypt;
     var secret = layui.token(true);
+
     var data = layui.ext(data, layui.GHM.data);
     var time = data.Timestamp = Math.round(new Date() / 1000); // 时分秒
     var token = data.Token = layui.token();
+
     if (token && data.Data && resEncrypt) data.Data = layui.des.encrypt(data.Data, secret, secret)
     data.Md5 = layui.md5(data.Data + time + '{' + token + '}');
 
     return new Promise(function (resolve, reject) {
       layui.jquery.post(url, data)
         .done(function (res) {
+          console.log(res)
           if (resEncrypt && typeof res.Data === 'string') {
             var data = layui.des.decrypt(res.Data, secret, secret);
             res.Data = JSON.parse(data);

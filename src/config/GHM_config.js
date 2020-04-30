@@ -8,7 +8,7 @@ var GHM_PT_API = ''; // 平台地址
 var GHM_PT_Domain = '';
 
 var hostname = window.location.hostname;
-if (hostname == 'localhost' || hostname.indexOf('192.168.20') != -1) {
+if (hostname == 'localhost' || hostname.indexOf('192.168.20') != -1 || hostname.indexOf('cjjmain') > -1) {
     // 本地环境
     GHM_BASE_API = 'http://cjjapi.blog.com/api';
     //GHM_BASE_API = 'http://192.168.20.35:9953/api';

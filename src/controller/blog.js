@@ -192,7 +192,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
     //添加博客类型
     function addCategory () {
         GHM.post(GHM_config.url.GetListCartgory, {
-            Data: {}
+            Data: '{}'
         }).then(function (res) {
             console.log(res.Data.length);
             if (res.Data.length > 0) {
@@ -274,16 +274,16 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
 
     function addUeditor () {
 
-        var width = $(".blog_contain").width();
+        var width = $(".addoreditform").width();
         myUeditor = "";
-
+        console.log(width)
         UE.delEditor('ueditor');
         myUeditor = UE.getEditor('ueditor', {
-            autoHeightEnabled: true,
             // autoFloatEnabled: true
-            initialFrameWidth: width - 40,
-            initialFrameHeight: 520,
-            autoHeightEnabled: false,
+            initialFrameWidth: width - 50,
+            initialFrameHeight: 720,
+            autoHeightEnabled: true,
+            autoFloatEnabled: true,
             zIndex: 1000,
             fontsize: [10, 11, 12, 14, 16, 18, 20, 24, 36],
             fontfamily: [
@@ -385,6 +385,8 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
                 //获取提交的字段
                 var field = {};
                 field.num = blogNum;
+                field.update = {};
+                field.update.isdeleted = 1;
                 GHM.post(GHM_config.url.DeleteItemBlog, {
                     Data: JSON.stringify(field)
                 }).then(function (res) {

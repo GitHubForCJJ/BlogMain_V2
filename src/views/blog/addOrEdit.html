@@ -3,78 +3,62 @@
     <link rel="stylesheet" href="{{ layui.setter.base }}style/blog/addOrEdit.css" media="all">
 </script>
 <div class="addoreditform">
-    <div class="layui-form" class="" lay-filter="LAY-addoredit-blog">
-        <div class="blog_contain">
-            <div class="left">
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">文章类型</label>
-                        <div class="layui-input-block">
-                            <select id='category' class="layui-select" lay-filter='categoryType' name="Type"
-                                style="z-index: 999;">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">标题</label>
-                        <div class="layui-input-block">
-                            <input type="text" id="Title" style="width: 450px;" id="OriginalUrl" name="Title"
-                                placeholder="请输入" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">是否原创</label>
-                        <div class="layui-input-block">
-                            <select id='IsOriginal' class="layui-select" name="IsOriginal">
-                                <option value="0">是</option>
-                                <option value="1">否</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">是否置顶</label>
-                        <div class="layui-input-block">
-                            <select id='IsTop' class="layui-select" name="IsTop">
-                                <option value="0">否</option>
-                                <option value="1">是</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">原创地址</label>
-                        <div class="layui-input-block">
-                            <input type="text" style="width: 450px;" id="OriginalUrl" name="OriginalUrl"
-                                placeholder="请输入" autocomplete="off" class="layui-input">
-                        </div>
-                    </div>
-
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-runOrder-search">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">文章类型</label>
+                <div class="layui-input-block">
+                    <select id='category' class="layui-select" lay-filter='categoryType' name="Type"
+                        style="z-index: 999;">
+                        <option value=""></option>
+                    </select>
                 </div>
             </div>
-            <div class="right">
 
+            <div class="layui-inline">
+                <label class="layui-form-label">是否原创</label>
+                <div class="layui-input-block">
+                    <select id='IsOriginal' class="layui-select" name="IsOriginal">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <!-- 富文本 -->
-        <form action="http://ashx.cjj.com/controller.ashx/controller.ashx" enctype="multipart/form-data" method="post">
-            <div class="ue_contain" style="z-index: 0;">
-                <script id="ueditor" name="ueditor" type="text/plain">
-
-            </script>
+            <div class="layui-inline">
+                <label class="layui-form-label">文章标题</label>
+                <div class="layui-input-block">
+                    <input class="layui-input blogtitle" id="Title" name="Title"></input>
+                </div>
+            </div> <br>
+            <div class="layui-inline">
+                <label class="layui-form-label">是否置顶</label>
+                <div class="layui-input-block">
+                    <select id='IsOriginal' class="layui-select" name="IsOriginal">
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                    </select>
+                </div>
             </div>
-        </form>
-        <!-- 博客编号 -->
-        <input type="hidden" name="num">
 
-        <div class="mybtnarea" style="border:none">
-            <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-Blog-add">确定</a>
-            <a href="javascript:" class="layui-btn layui-btn-cancel" onclick="layer.closeAll()">取消</a>
+            <!-- 博客编号 -->
+            <input type="hidden" name="num">
+
+            <div class="layui-block layui_btn_area">
+                <button class="layui-btn" lay-submit lay-filter="LAY-Blog-add">确定</button>
+                <button class="layui-btn layui-btn-cancel" onclick="layer.closeAll()">取消</button>
+            </div>
         </div>
     </div>
+    <!-- 富文本 -->
+    <form action="http://ashx.cjj.com/controller.ashx/controller.ashx" enctype="multipart/form-data" method="post">
+        <div class="ue_contain" style="z-index: 0;">
+            <script id="ueditor" name="ueditor" type="text/plain">
+
+            </script>
+        </div>
+    </form>
+
+
 </div>
 
 
