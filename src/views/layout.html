@@ -58,7 +58,7 @@
             <li class="layui-nav-item" lay-unselect>
                 <script type="text/html" template lay-done="layui.element.render('nav', 'layadmin-layout-right');">
                     <a href="javascript:;">
-                        <cite>{{ layui.data('BlogAdmin').Model.UserNickName }}</cite>
+                        <cite>{{ layui.data('BlogAdmin').Model.UserName }}</cite>
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a lay-href="user/resetPwd">修改密码</a></dd>
@@ -137,9 +137,9 @@
                     {{# }); }}
                 </ul>
                 <div class="user_info">
-                    {{ layui.data('BlogAdmin').Model.UserNickName }}
+                    {{ layui.data('BlogAdmin').Model.UserName }}
                     <ul class="list">
-                        <li class="user">{{ layui.data('BlogAdmin').Model.UserAccount }}</li>
+                        <li class="user">{{ layui.data('BlogAdmin').Model.UserName }}</li>
                         {{# if(layui.data('BlogAdmin').Model.CompanyId !== 1){ }}
                         <li>
                             <a href="javascript:" id="linkPT">联盟圈后台</a>
