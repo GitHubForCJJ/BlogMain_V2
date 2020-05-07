@@ -50,6 +50,8 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
             format: 'yyyy-MM-dd'
         })
     });
+    //添加分类下拉框
+    addCategory()
     //数据渲染加载
     table.render({
         elem: '#LAY-Blog-manage',
@@ -165,7 +167,7 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
         var state = $(this).data().state;
         $(this).addClass('active').siblings('li').removeClass('active');
         $('input[name = States]').val(state);
-        $('#LAY-Advert-search').click();
+        $('#LAY-Blog-search').click();
     });
 
     //监听排序
@@ -191,14 +193,14 @@ layui.define(['table', 'layer', 'form', 'jquery', 'laydate', 'element', 'GHM'], 
 
     //添加博客类型
     function addCategory () {
-        GHM.post(GHM_config.url.GetListCartgory, {
+        GHM.post(GHM_config.url.GetListCategory, {
             Data: '{}'
         }).then(function (res) {
             console.log(res.Data.length);
             if (res.Data.length > 0) {
                 for (var i in res.Data) {
                     var html = "<option value='" + res.Data[i].KID + "'>" + res.Data[i].Name + "</option>"
-                    $("#category").append(html);
+                    $(".category").append(html);
                 }
                 form.render();
             }

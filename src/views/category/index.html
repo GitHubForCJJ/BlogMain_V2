@@ -1,0 +1,52 @@
+<div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-category-search">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="KID" class="layui-form-label">名称</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入" id="IpAddress" name="Name|l" class="layui-input">
+                </div>
+            </div>
+            <input type="hidden" name="AccessType">
+            <br>
+            <div class="layui_btn_area">
+                <button class="layui-btn layui-btn-danger layui-admin-category" id='LAY-category-search' lay-submit
+                    lay-filter="LAY-category-search">查询</button>
+                <script type='text/html' template>
+                        {{# if(GHM_Core.btnRole('category/index:add')){ }}
+                        <button class="layui-btn layui-btn-success layui-admin-category" style="background-color: #FF9900" data-type="add">添加</button>
+                        {{# } }}
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="layui-card-body">
+        <ul class="g-states-tab states_tab">
+
+            <li class="active" data-state="">全部</li>
+            <li data-state="0">启用</li>
+            <li data-state="1">禁用</li>
+        </ul>
+        <table class="layui-table" lay-filter="LAY-category-manage" id="LAY-category-manage"></table>
+    </div>
+
+    <script type="text/html" id="table-category-operation">
+        {{# if(GHM_Core.btnRole('category/index:edit')){ }}
+        <a class="table_operate " lay-event="Edit">【编辑】</a>
+        {{# } }}
+        {{# if(GHM_Core.btnRole('category/index:delete')){ }}
+        <a class="table_operate " lay-event="Delete">【删除】</a>
+        {{# } }}
+</script>
+</div>
+<script>
+    layui.use(['category'], layui.factory('category')).use(['admin', 'comment', 'table'], function () {
+        var $ = layui.$
+            , admin = layui.admin
+            , view = layui.view
+            , table = layui.table
+            , form = layui.form
+            , GHM = layui.GHM;
+        form.render(null, 'LAY-category-search');
+    });
+</script>

@@ -1,0 +1,70 @@
+<div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-access-search">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="KID" class="layui-form-label">IP地址</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入" id="IpAddress" name="IpAddress|l" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="KID" class="layui-form-label">博客</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入" id="BlogName|l" name="BlogName|l" class="layui-input">
+                </div>
+            </div>
+            <input type="hidden" name="AccessType">
+            <br>
+            <div class="layui_btn_area">
+                <button class="layui-btn layui-btn-danger layui-admin-access" id='LAY-access-search' lay-submit
+                    lay-filter="LAY-access-search">查询</button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-card-body">
+        <ul class="g-states-tab states_tab">
+
+            <li class="active" data-state="">全部</li>
+            <li data-state="0">首页访问</li>
+            <li data-state="1">博客访问</li>
+        </ul>
+        <table class="layui-table" lay-filter="LAY-access-manage" id="LAY-access-manage"></table>
+    </div>
+
+    <script type="text/html" id="AccessType">
+        {{#  if(d.AccessType ==  0){ }}
+        <span>首页访问</span>
+        {{#  } else { }}
+        <span style='color:#FF9100'>博客访问</span>
+        {{#  } }}
+     </script>
+    <!-- <script type="text/html" id="access_States">
+        {{#  if(d.States ==  0){ }}
+        <input type="checkbox" lay-filter="startstop2" value={{d.KID}} lay-skin="switch" lay-text="启用|禁用" checked>
+        {{#  } else { }}
+        <input type="checkbox" lay-filter="startstop2" value={{d.KID}} lay-skin="switch" lay-text="启用|禁用">
+        {{#  } }}
+     </script> -->
+    <!-- <script type="text/html" id="table-access-operation">
+                    {{# if(GHM_Core.btnRole('runServiceGroup/index:edit')){ }}
+                    <a class="table_operate " lay-event="Edit">【编辑】</a>
+                    {{# } }}
+                    {{# if(GHM_Core.btnRole('runServiceGroup/index:del')){ }}
+                    <a class="table_operate " lay-event="Delete">【删除】</a>
+                    {{# } }}
+                    {{# if(GHM_Core.btnRole('runServiceGroup/index:log')){ }}
+                    <a class="table_operate " lay-event="Log">【日志】</a>
+                    {{# } }}
+            </script> -->
+</div>
+<script>
+    layui.use(['access'], layui.factory('access')).use(['admin', 'access', 'table'], function () {
+        var $ = layui.$
+            , admin = layui.admin
+            , view = layui.view
+            , table = layui.table
+            , form = layui.form
+            , GHM = layui.GHM;
+        form.render(null, 'LAY-access-search');
+    });
+</script>

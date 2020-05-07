@@ -40,12 +40,12 @@ GHM_config.url = {
     DelItemMenuByKid: GHM_BASE_API + '/Menu/DelItemMenuByKid',
 
     // 角色管理
-    GetListRole: GHM_BASE_API + '/Role/GetListRole',
-    UpdateItemRole: GHM_BASE_API + '/Role/UpdateItemRole',
-    AddItemRole: GHM_BASE_API + '/Role/AddItemRole',
-    DeleteItemRole: GHM_BASE_API + '/Role/DeleteItemRole',
-    GetItemRole: GHM_BASE_API + '/Role/GetItemRole',
-    GetSmallListRole: GHM_BASE_API + '/Role/GetSmallListRole',
+    GetListRole: GHM_BASE_API + '/AdminRole/GetList',
+    UpdateItemRole: GHM_BASE_API + '/AdminRole/UpdateItem',
+    AddItemRole: GHM_BASE_API + '/AdminRole/AddItem',
+    DeleteItemRole: GHM_BASE_API + '/AdminRole/DeleteItem',
+    GetItemRole: GHM_BASE_API + '/AdminRole/GetItem',
+    GetSmallListRole: GHM_BASE_API + '/AdminRole/GetSmallListRole',
 
     GetListBlog: GHM_BASE_API + '/AdminBlog/GetListBlog', //获取博客list
     GetItemBlog: GHM_BASE_API + '/AdminBlog/GetItemBlog', //获取博客item
@@ -53,6 +53,20 @@ GHM_config.url = {
     UpdateItemBlog: GHM_BASE_API + '/AdminBlog/UpdateItemBlog', //添加博客item
     DeleteItemBlog: GHM_BASE_API + '/AdminBlog/DeleteItemBlog', //添加博客item
     StartOrStop: GHM_BASE_API + '/AdminBlog/StartOrStop', //启用禁用博客item
-    GetListCartgory: GHM_BASE_API + '/Category/GetListCartgory', //获取博客类型
 
+
+    //访问信息
+    GetListAccess: GHM_BASE_API + '/Access/GetList',
+
+    //点赞管理
+    GetListArtise: GHM_BASE_API + '/Artise/GetList',
+
+    //评论管理
+    GetListAdminComment: GHM_BASE_API + '/AdminComment/GetList',
+    //类别管理
+    GetListCategory: GHM_BASE_API + '/Category/GetList',
+    GetItemCategory: GHM_BASE_API + '/Category/GetItem', //获取博客类型
+    AddItemCategory: GHM_BASE_API + '/Category/AddItem',
+    UpdateItemCategory: GHM_BASE_API + '/Category/UpdateItem',
+    DeleteItemCategory: GHM_BASE_API + '/Category/DeleteItem',
 }

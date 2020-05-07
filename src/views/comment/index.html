@@ -1,0 +1,44 @@
+<div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-comment-search">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="KID" class="layui-form-label">IP地址</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入" id="IpAddress" name="IpAddress|l" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="KID" class="layui-form-label">博客</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入" id="BlogName|l" name="BlogName|l" class="layui-input">
+                </div>
+            </div>
+            <input type="hidden" name="AccessType">
+            <br>
+            <div class="layui_btn_area">
+                <button class="layui-btn layui-btn-danger layui-admin-access" id='LAY-comment-search' lay-submit
+                    lay-filter="LAY-comment-search">查询</button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-card-body">
+        <table class="layui-table" lay-filter="LAY-access-manage" id="LAY-comment-manage"></table>
+    </div>
+
+    <script type="text/html" id='Comment_Avator'>
+        {{# if(d.Avatar!=''&& d.Avatar.length>0){ }}
+        <img src={{d.Avatar}} class='click_img' style='width:50px;' alt="">
+        {{#} }}
+     </script>
+</div>
+<script>
+    layui.use(['comment'], layui.factory('comment')).use(['admin', 'comment', 'table'], function () {
+        var $ = layui.$
+            , admin = layui.admin
+            , view = layui.view
+            , table = layui.table
+            , form = layui.form
+            , GHM = layui.GHM;
+        form.render(null, 'LAY-comment-search');
+    });
+</script>

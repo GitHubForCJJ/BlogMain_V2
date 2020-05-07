@@ -1,0 +1,45 @@
+<div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-artise-search">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="KID" class="layui-form-label">博客编号</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入" id="BlogName|l" name="BlogNum|l" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label for="KID" class="layui-form-label">IP地址</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入" id="IpAddress" name="IpAddress|l" class="layui-input">
+                </div>
+            </div>
+            <input type="hidden" name="AccessType">
+            <br>
+            <div class="layui_btn_area">
+                <button class="layui-btn layui-btn-danger" id='LAY-artise-search' lay-submit
+                    lay-filter="LAY-artise-search">查询</button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-card-body">
+        <!-- <ul class="g-states-tab states_tab">
+
+            <li class="active" data-state="">全部</li>
+            <li data-state="0">首页访问</li>
+            <li data-state="1">博客访问</li>
+        </ul> -->
+        <table class="layui-table" lay-filter="LAY-artise-manage" id="LAY-artise-manage"></table>
+    </div>
+
+</div>
+<script>
+    layui.use(['artise'], layui.factory('artise')).use(['admin', 'artise', 'table'], function () {
+        var $ = layui.$
+            , admin = layui.admin
+            , view = layui.view
+            , table = layui.table
+            , form = layui.form
+            , GHM = layui.GHM;
+        form.render(null, 'LAY-artise-search');
+    });
+</script>

@@ -10,8 +10,6 @@ layui.define(function (exports) {
                 mode: CryptoJS.mode.CBC,
                 padding: CryptoJS.pad.Pkcs7
             });
-        console.log(encrypted)
-        console.log(decrypted.toString(CryptoJS.enc.Utf8))
 
         return decrypted.toString(CryptoJS.enc.Utf8);
     };

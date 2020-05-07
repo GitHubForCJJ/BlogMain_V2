@@ -1,0 +1,36 @@
+<title>添加编辑博客分类</title>
+<script type="text/html" template>
+    <!-- <link rel="stylesheet" href="{{ layui.setter.base }}style/channel/channel_addOrEdit.css" media="all"> -->
+</script>
+<div class="admin_popup_box">
+    <div class="layui-form" lay-filter="LAY-edit-category-submit">
+        <script type="text/html" template>
+        <input type="hidden" name="KID" value="{{ d.params.KID|| 0}}">
+
+    </script>
+
+        <div class="scroll_content">
+            <div class="layui-form-item">
+                <label class="layui-form-label item-must">名称</label>
+                <div class="layui-input-block ">
+                    <script type="text/html" template>
+                        <input type="text" class='layui-input' lay-verify="Name" name='Name' value="{{d.params.Name ||''}}">
+                    </script>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label item-must">排序</label>
+                <div class="layui-input-block ">
+                    <script type="text/html" template>
+                        <input type="text" class='layui-input' lay-verify="Sort" name='Sort' value="{{d.params.Sort ||''}}">
+                    </script>
+                </div>
+            </div>
+
+        </div>
+        <div class="btn_area">
+            <a href="javascript:" class="layui-btn layui-btn-cancel" onclick="layer.closeAll()">取消</a>
+            <a href="javascript:" class="layui-btn" lay-submit lay-filter="LAY-category-add-submit">确定</a>
+        </div>
+    </div>
+</div>
