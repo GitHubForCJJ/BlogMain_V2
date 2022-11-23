@@ -24,6 +24,6 @@
     "sinon-chai": "^2.13.0"
   },
   "dependencies": {
-    "browser-sync": "^2.26.7"
+    "browser-sync": "^2.27.10"
   }
 }
